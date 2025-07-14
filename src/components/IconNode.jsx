@@ -38,7 +38,7 @@ export default function IconNode({ data }) {
       <Handle type="source" position={Position.Left} id="left" style={invisibleHandleStyle} />
       <Handle type="target" position={Position.Left} id="left" style={invisibleHandleStyle} />
       <img
-        src={data.icon}
+        src={import.meta.env.BASE_URL + data.icon}
         alt=""
         style={{
           width: '100%',

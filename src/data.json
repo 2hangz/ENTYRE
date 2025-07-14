@@ -2,198 +2,198 @@
   "nodesData": [
     {
         "id": "s1",
-        "icon": "/ENTYRE/icons/s1.png",
+        "icon": "icons/s1.png",
         "type": "backgroundImage"
     },
     {
         "id":"s2",
-        "icon":"/ENTYRE/icons/s2.png",
+        "icon":"/icons/s2.png",
         "type":"backgroundImage"
     },
     {
         "id":"s3",
-        "icon":"/ENTYRE/icons/s3.png",
+        "icon":"/icons/s3.png",
         "type":"backgroundImage",
         "selectable": false
     },
     { 
         "id": "new_tyres", 
-        "icon": "/ENTYRE/icons/newTyres.png" 
+        "icon": "/icons/newTyres.png" 
     },
 
-    { "id": "cars", "icon": "/ENTYRE/icons/cars.png" },
-    { "id": "worn_out_tyres", "icon": "/ENTYRE/icons/wornoutTyres.png" },
-    { "id": "retreaded_tyres", "icon": "/ENTYRE/icons/retreadedTyres.png" },
-    { "id": "retreading", "icon": "/ENTYRE/icons/retreading.png" },
-    { "id": "collection_sorting", "icon": "/ENTYRE/icons/collectingSorting.png" },
+    { "id": "cars", "icon": "/icons/cars.png" },
+    { "id": "worn_out_tyres", "icon": "/icons/wornoutTyres.png" },
+    { "id": "retreaded_tyres", "icon": "/icons/retreadedTyres.png" },
+    { "id": "retreading", "icon": "/icons/retreading.png" },
+    { "id": "collection_sorting", "icon": "/icons/collectingSorting.png" },
     { 
         "id": "end_of_life_tyres", 
-        "icon": "/ENTYRE/icons/eltTyres.png", 
+        "icon": "/icons/eltTyres.png", 
         "label": "End-of-Life Tyres", 
         "detail": "Only used tyres which can neither be used to perform their original function nor reusable and are discarded become an end-of-life tyre or ELT, legally classified as non-hazardous waste." 
     },
-    { "id": "civil_engineering", "icon": "/ENTYRE/icons/civilEngineering.png" },
-    { "id": "embankments", "icon": "/ENTYRE/icons/embankments.png" },
-    { "id": "retaining_walls", "icon": "/ENTYRE/icons/retainingWalls.png" },
-    { "id": "composite_panels", "icon": "/ENTYRE/icons/compositePanel.png" },
-    { "id": "shredding", "icon": "/ENTYRE/icons/shredding.png" },
-    { "id": "shredded_tyres", "icon": "/ENTYRE/icons/shreddedTyres.png" },
+    { "id": "civil_engineering", "icon": "/icons/civilEngineering.png" },
+    { "id": "embankments", "icon": "/icons/embankments.png" },
+    { "id": "retaining_walls", "icon": "/icons/retainingWalls.png" },
+    { "id": "composite_panels", "icon": "/icons/compositePanel.png" },
+    { "id": "shredding", "icon": "/icons/shredding.png" },
+    { "id": "shredded_tyres", "icon": "/icons/shreddedTyres.png" },
     { 
         "id": "gasification", 
-        "icon": "/ENTYRE/icons/gasification.png", 
+        "icon": "/icons/gasification.png", 
         "label": "Gasification", 
         "detail": "More complex, expensive infrastructure than pyrolysis. Syngas has less immediate market value than pyrolysis oil." 
     },
     { 
         "id": "scrapsteel1", 
-        "icon": "/ENTYRE/icons/scrapSteel.png" 
+        "icon": "/icons/scrapSteel.png" 
     },
-    { "id": "scrapsteel2", "icon": "/ENTYRE/icons/scrapSteel.png" },
-    { "id": "syngas", "icon": "/ENTYRE/icons/syngas.png" },
-    { "id": "heat", "icon": "/ENTYRE/icons/heat.png" },
+    { "id": "scrapsteel2", "icon": "/icons/scrapSteel.png" },
+    { "id": "syngas", "icon": "/icons/syngas.png" },
+    { "id": "heat", "icon": "/icons/heat.png" },
     { 
         "id": "electricity", 
-        "icon": "/ENTYRE/icons/electricity.png",
+        "icon": "/icons/electricity.png",
         "label": "Electricity",
         "detail": "Electricity is a form of energy that can be used to power devices and systems."
     },
     { 
       "id": "incineration", 
-      "icon": "/ENTYRE/icons/incineration.png", 
+      "icon": "/icons/incineration.png", 
       "label": "Incineration", 
       "detail": "High Efficiency Incineration for Energy Recovery."
     },
-    { "id": "granulation", "icon": "/ENTYRE/icons/granulation.png" },
-    { "id": "separation", "icon": "/ENTYRE/icons/separation.png" },
-    { "id": "scrapsteel3", "icon": "/ENTYRE/icons/scrapSteel.png" },
-    { "id": "scraptextile", "icon": "/ENTYRE/icons/scrapTextile.png" },
-    { "id": "granulated_tyres", "icon": "/ENTYRE/icons/granulatedTyres.png" },
-    { "id": "grinding", "icon": "/ENTYRE/icons/grinding.png", "label": "Grinding", "detail": "This is the grinding process." },
-    { "id": "pyrolysis", "icon": "/ENTYRE/icons/pyrolysis.png" },  
-    { "id": "crumb_rubber", "icon": "/ENTYRE/icons/crumbRubber.png" },
-    { "id": "pyro_oil", "icon": "/ENTYRE/icons/pyroOil.png" },
-    { "id": "pyro_gas", "icon": "/ENTYRE/icons/pyroGas.png" },
-    { "id": "pyro_char", "icon": "/ENTYRE/icons/pyroChar.png" },
-    { "id": "devulcanisation", "icon": "/ENTYRE/icons/devulcanisation.png" },
-    { "id": "hydrotreatment", "icon": "/ENTYRE/icons/hydrotreatment.png" },
-    { "id": "heating_pulverisation", "icon": "/ENTYRE/icons/heatingPulverisation.png" },
-    { "id": "CHPUnit", "icon": "/ENTYRE/icons/CHPUnit.png" },
-    { "id": "refining", "icon": "/ENTYRE/icons/refining.png" },
-    { "id": "DR", "icon": "/ENTYRE/icons/DR.png" },
-    { "id": "moulded_objects", "icon": "/ENTYRE/icons/mouldedObjects.png" },
+    { "id": "granulation", "icon": "/icons/granulation.png" },
+    { "id": "separation", "icon": "/icons/separation.png" },
+    { "id": "scrapsteel3", "icon": "/icons/scrapSteel.png" },
+    { "id": "scraptextile", "icon": "/icons/scrapTextile.png" },
+    { "id": "granulated_tyres", "icon": "/icons/granulatedTyres.png" },
+    { "id": "grinding", "icon": "/icons/grinding.png", "label": "Grinding", "detail": "This is the grinding process." },
+    { "id": "pyrolysis", "icon": "/icons/pyrolysis.png" },  
+    { "id": "crumb_rubber", "icon": "/icons/crumbRubber.png" },
+    { "id": "pyro_oil", "icon": "/icons/pyroOil.png" },
+    { "id": "pyro_gas", "icon": "/icons/pyroGas.png" },
+    { "id": "pyro_char", "icon": "/icons/pyroChar.png" },
+    { "id": "devulcanisation", "icon": "/icons/devulcanisation.png" },
+    { "id": "hydrotreatment", "icon": "/icons/hydrotreatment.png" },
+    { "id": "heating_pulverisation", "icon": "/icons/heatingPulverisation.png" },
+    { "id": "CHPUnit", "icon": "/icons/CHPUnit.png" },
+    { "id": "refining", "icon": "/icons/refining.png" },
+    { "id": "DR", "icon": "/icons/DR.png" },
+    { "id": "moulded_objects", "icon": "/icons/mouldedObjects.png" },
     { 
       "id": "crumb_rubber_infill", 
-      "icon": "/ENTYRE/icons/crumbRubberInfill.png",
+      "icon": "/icons/crumbRubberInfill.png",
       "label": "Crumb Rubber Infill",
       "detail": "It's banned due to the [REACH regulation]. Annex XVII to REACH Regulation(EC No 1907/2006)."
     },
     { 
         "id": "RA", 
-        "icon": "/ENTYRE/icons/RA.png",
+        "icon": "/icons/RA.png",
         "label": "Rubberized Asphalt",
         "detail": "Rubberized asphalt is a pavement material that combines traditional asphalt with crumbrubber derived. It replaces or modifies the traditional asphalt bitumen binder (a petroleum product)."
     },
     { 
         "id": "CRC", 
-        "icon": "/ENTYRE/icons/CRC.png" },
-    { "id": "gasoline", "icon": "/ENTYRE/icons/gasoline.png" },
-    { "id": "sustainable_fuel", "icon": "/ENTYRE/icons/saf.png" },
-    { "id": "rCB", "icon": "/ENTYRE/icons/rCB.png" },
-    { "id": "heavyOil", "icon": "/ENTYRE/icons/heavyOil.png" },
-    { "id": "naphtha", "icon": "/ENTYRE/icons/naphtha.png" },
-    { "id": "electricity1", "icon": "/ENTYRE/icons/electricity1.png" },
-    { "id": "heat1", "icon": "/ENTYRE/icons/heat1.png" },
+        "icon": "/icons/CRC.png" },
+    { "id": "gasoline", "icon": "/icons/gasoline.png" },
+    { "id": "sustainable_fuel", "icon": "/icons/saf.png" },
+    { "id": "rCB", "icon": "/icons/rCB.png" },
+    { "id": "heavyOil", "icon": "/icons/heavyOil.png" },
+    { "id": "naphtha", "icon": "/icons/naphtha.png" },
+    { "id": "electricity1", "icon": "/icons/electricity1.png" },
+    { "id": "heat1", "icon": "/icons/heat1.png" },
     { 
       "id": "externalEnergyInput4Devulcanisation", 
-      "icon": "/ENTYRE/icons/externalEnergyInput4Devulcanisation.png", 
+      "icon": "/icons/externalEnergyInput4Devulcanisation.png", 
       "label": "External Energy Input", 
       "detail": "Shredding, Granulation, Grinding need 354 kWh External Electricity." 
     },
     { 
       "id": "externalEnergyInput4Devulcanisation1", 
-      "icon": "/ENTYRE/icons/externalEnergyInput4Devulcanisation1.png", 
+      "icon": "/icons/externalEnergyInput4Devulcanisation1.png", 
       "label": "External Energy Input", 
       "detail": "Devulcanisation needs 674 kWh External Electricity." 
     },
     { 
       "id": "externalEnergyInput4RA", 
-      "icon": "/ENTYRE/icons/externalEnergyInput4RA.png", 
+      "icon": "/icons/externalEnergyInput4RA.png", 
       "label": "External Energy Input", 
       "detail": "Shredding, Granulation, Grinding need 354 kWh External Electricity." 
     },
     {
       "id": "elt1000kg",
-      "icon": "/ENTYRE/icons/elt1000kg.png",
+      "icon": "/icons/elt1000kg.png",
       "label": "End-of-Life Tyres",
       "detail": "ELT 1000kg"
     },
     {
       "id": "shreddedTyresSankey",
-      "icon": "/ENTYRE/icons/shreddedTyresSankey.png",
+      "icon": "/icons/shreddedTyresSankey.png",
       "label": "Shredded Tyres",
       "detail": "Shredded Tyres"
     },
     {
       "id": "scrapsteelSankey",
-      "icon": "/ENTYRE/icons/scrapSteelSankey.png",
+      "icon": "/icons/scrapSteelSankey.png",
       "label": "Scrap Steel",
       "detail": "Scrap Steel"
     },
     {
       "id": "scrapTextileSankey",
-      "icon": "/ENTYRE/icons/scrapTextileSankey.png",
+      "icon": "/icons/scrapTextileSankey.png",
       "label": "Scrap Textile",
       "detail": "Scrap Textile" 
     },
     {
       "id": "granulatedTyresSankey",
-      "icon": "/ENTYRE/icons/granulatedTyresSankey.png",
+      "icon": "/icons/granulatedTyresSankey.png",
       "label": "Granulated Tyres",
       "detail": "Granulated Tyres" 
     },
     {
       "id": "rCBsankeyDiagram",
-      "icon": "/ENTYRE/icons/rCBsankeyDiagram.png"
+      "icon": "/icons/rCBsankeyDiagram.png"
     },
     {
       "id": "pyroOilSankey",
-      "icon": "/ENTYRE/icons/pyroOilSankey.png",
+      "icon": "/icons/pyroOilSankey.png",
       "label": "Pyro Oil",
       "detail": "Pyro Oil" 
     },
     {
       "id": "pyroGasSankey",
-      "icon": "/ENTYRE/icons/pyroGasSankey.png",
+      "icon": "/icons/pyroGasSankey.png",
       "label": "Pyro Gas",
       "detail": "Pyro Gas" 
     },
     {
       "id": "pyroCharSankey",
-      "icon": "/ENTYRE/icons/pyroCharSankey.png",
+      "icon": "/icons/pyroCharSankey.png",
       "label": "Pyro Char",
       "detail": "Pyro Char" 
     },
     {
       "id": "rCBSankey",
-      "icon": "/ENTYRE/icons/rCBSankey.png",
+      "icon": "/icons/rCBSankey.png",
       "label": "Recovered Carbon Black",
       "detail": "Recovered Carbon Black" 
     },
     {
       "id": "rCBEmissions",
-      "icon": "/ENTYRE/icons/rCBEmissions.png",
+      "icon": "/icons/rCBEmissions.png",
       "label": "CHP Unit Emissions",
       "detail": "CHP Unit Emissions" 
     },
     {
       "id": "rCBHeat",
-      "icon": "/ENTYRE/icons/rCBHeat.png",
+      "icon": "/icons/rCBHeat.png",
       "label": "Pyrolysis-rCB Heat",
       "detail": "Pyrolysis-rCB Heat" 
     },
     {
       "id": "rCBElectricity",
-      "icon": "/ENTYRE/icons/rCBElectricity.png",
+      "icon": "/icons/rCBElectricity.png",
       "label": "Pyrolysis-rCB Electricity",
       "detail": "Pyrolysis-rCB Electricity" 
     }
