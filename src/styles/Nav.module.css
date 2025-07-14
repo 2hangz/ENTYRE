@@ -1,0 +1,50 @@
+/* Nav.module.css */
+
+.navbar {
+    background-color: #05243B;
+    color: white;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+  
+  .navContainer {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logoButton {
+    padding: 0.2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .logoImage {
+    width: 100px;
+    display: block;
+  }
+  
+  .navLinks {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .navLink {
+    color: white;
+    text-decoration: none;
+    font-weight: normal;
+    transition: color 0.2s;
+  }
+  
+  .navLink:hover {
+    color: #d1d5db;
+}
+  
+  .activeLink {
+    font-weight: bold;
+  }
