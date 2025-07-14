@@ -20,4 +20,4 @@ Therefore, it is vital Ireland relies on a new method of waste tyre management. 
 After in-depth research and stakeholder consultation, a Multicriteria Decision Making (MCDM) tool will rank the various options for End-of-Life tyres (ELT), outlining the most economically and environmentally sensible waste tyre management plan.
 
 <!-- split -->
-![ENTYRE Project](/src/assets/WebBanner.png)
+![ENTYRE Project](./assets/WebBanner.png)
