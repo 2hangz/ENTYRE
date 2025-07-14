@@ -86,7 +86,7 @@ export default function KeyOutputs() {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    fetch('/content/outputs.md')
+    fetch(import.meta.env.BASE_URL + 'content/outputs.md')
       .then(res => res.text())
       .then(text => {
         const sections = text.split('<!-- split -->');
