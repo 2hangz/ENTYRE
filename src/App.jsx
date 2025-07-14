@@ -15,7 +15,7 @@ import DataVisualisation from './pages/DataVisualisation';
 
 export default function App() {
   return (
-    <Router basename="/ENTYRE">
+    <Router>
       <div className={styles.appWrapper}>
         <Navbar />
 
