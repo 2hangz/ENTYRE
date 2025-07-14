@@ -5,7 +5,8 @@ import styles from '../styles/Nav.module.css';
 const Navbar = () => {
   const location = useLocation();
   
-  const isActive = (path) => location.pathname === path;
+  const isActive = (path) => location.hash === `#${path}`;
+
 
   return (
     <nav className={styles.navbar}>
