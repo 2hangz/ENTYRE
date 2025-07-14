@@ -76,7 +76,7 @@ export default function Home() {
   const [open3, setOpen3] = useState(false);
 
   useEffect(() => {
-    fetch('/content/home.md')
+    ffetch(import.meta.env.BASE_URL + 'content/home.md')
       .then(res => res.text())
       .then(text => {
         const parts = text.split('<!-- split -->');
