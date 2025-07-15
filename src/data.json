@@ -2,17 +2,17 @@
   "nodesData": [
     {
         "id": "s1",
-        "icon": "/icons/s1.png",
+        "icon": "icons/s1.png",
         "type": "backgroundImage"
     },
     {
         "id":"s2",
-        "icon":"/icons/s2.png",
+        "icon":"icons/s2.png",
         "type":"backgroundImage"
     },
     {
         "id":"s3",
-        "icon":"/icons/s3.png",
+        "icon":"icons/s3.png",
         "type":"backgroundImage",
         "selectable": false
     },
