@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from '../styles/App.module.css';
 
 const tabList = [
-  { label: <h2>Compare pathways</h2>, key: "compare" },
+  { label: <h2>Compare Pathways</h2>, key: "compare" },
   { label: <h2>MCDA Tool</h2>, key: "mcda" }
 ];
 
