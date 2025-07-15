@@ -2,7 +2,7 @@
   "nodesData": [
     {
         "id": "s1",
-        "icon": "icons/s1.png",
+        "icon": "/icons/s1.png",
         "type": "backgroundImage"
     },
     {

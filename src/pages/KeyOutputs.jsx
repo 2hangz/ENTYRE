@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import styles from '../styles/App.module.css';
+import {Link} from 'react-router-dom'
 
 function getImageUrl(media) {
   return media?.data?.attributes?.url
@@ -94,7 +95,10 @@ export default function KeyOutputs() {
       });
     fetch('http://localhost:1337/api/articles?populate=*')
       .then(res => res.json())
-      .then(data => setArticles(data.data || []));
+      .then(data => {
+        console.log(data);
+        setArticles(data.data || []);
+      });
     fetch('http://localhost:1337/api/videos?populate=*')
       .then(res => res.json())
       .then(data => setVideos(data.data));
@@ -106,7 +110,11 @@ export default function KeyOutputs() {
       <div className={styles['article-list']}>
       <div className={styles['article-cards']}>
           {articles.map(article => (
-            <div className={styles['article-card']} key={article.id}>
+            <Link
+              className={styles['article-card']} 
+              to={`/outputs/${article.id}`}
+              key={article.id}
+              >
               {Array.isArray(article.image) && article.image[0]?.url && (
                 <img
                   src={'http://localhost:1337' + article.image[0].url}
@@ -115,14 +123,10 @@ export default function KeyOutputs() {
                 />
               )}
               <div>
-                <h3>
-                  {article.articleTitle}
-                </h3>
-                <p>
-                  {article.summary}
-                </p>
+                <h3>{article.articleTitle}</h3>
+                <p>{article.summary}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
