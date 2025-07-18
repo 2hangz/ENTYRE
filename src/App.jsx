@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import KeyOutputs from './pages/KeyOutputs';
+import ArticleDetail from './pages/OutputDetail';
 import PathwayExplorer from './pages/PathwayExplorer';
 import DataVisualisation from './pages/DataVisualisation';
 
@@ -26,6 +27,7 @@ export default function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/key-outputs" element={<KeyOutputs />} />
+              <Route path="/outputs/:id" element={<ArticleDetail />} />
               <Route path="/pathway-explorer" element={<PathwayExplorer />} />
               <Route path="/data-visualisation" element={<DataVisualisation />} />
             </Routes>

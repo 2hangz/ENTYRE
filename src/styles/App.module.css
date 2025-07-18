@@ -279,20 +279,25 @@ margin-bottom: 8px;
   font-size: 48px;
   color: #fff;
   text-shadow: 0 0 8px #000;
+  cursor: pointer;
+  z-index: 2;
 }
 
+.video-card::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  pointer-events: none;
+  z-index: 1;
+}
+
+
 .video-card {
-  justify-content: flex-start;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  width: 500px;
+  height: 315px;
   position: relative;
-  cursor: pointer;
-  max-width: 500px;
-  height: 100%;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-  background: #fff;
+  overflow: hidden;
 }
 
 .video-player {
@@ -308,8 +313,22 @@ margin-bottom: 8px;
   justify-content: center;
 }
 
+
+.video-frame {
+  border: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .video-title {
   width: 500px;
+}
+.video-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
 }
 
  /* dataVisualisation */

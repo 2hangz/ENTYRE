@@ -4,29 +4,20 @@ import remarkGfm from 'remark-gfm';
 import styles from '../styles/App.module.css';
 
 const BannerCarousel = () => {
-  const [images, setImages] = useState([]);
+  const [banners, setBanners] = useState([]);
   const [current, setCurrent] = useState(0);
-  
+
   useEffect(() => {
     let timer;
-    fetch('http://localhost:1337/api/home-page-banners?populate=*')
+    fetch('http://localhost:3001/api/banners')
       .then(res => res.json())
       .then(data => {
-        const banners = (data.data || []).map(item => {
-          const bannerArr = item.Banner || [];
-          const firstBanner = bannerArr[0];
-          let imageUrl = firstBanner?.url ? 'http://localhost:1337' + firstBanner.url : '';
-          return {
-            url: imageUrl,
-            alt: item.PicName || 'Banner Image',
-            caption: item.PicName || '',
-          };
-        });
-        setImages(banners);
+        const bannersArr = Array.isArray(data) ? data : [];
+        setBanners(bannersArr);
 
-        if (banners.length > 0) {
+        if (bannersArr.length > 0) {
           timer = setInterval(() => {
-            setCurrent(prev => (prev + 1) % banners.length);
+            setCurrent(prev => (prev + 1) % bannersArr.length);
           }, 3500);
         }
       })
@@ -37,27 +28,29 @@ const BannerCarousel = () => {
     };
   }, []);
 
-  if (!images.length) {
+  if (!banners.length) {
     return (
       <div className={styles.bannerCarousel} style={{ minHeight: 260, background: '#f3f4f6' }}>
       </div>
     );
   }
 
+  const currentBanner = banners[current];
+
   return (
     <div className={styles.bannerCarousel}>
-      <img
-        src={images[current].url}
-        alt={images[current].alt}
-        className={styles.bannerImage}
-      />
-      <div
-        className={styles.bannerCaption}
-      >
-        {images[current].caption}
+      <a href={currentBanner.link || "#"} tabIndex={-1}>
+        <img
+          src={currentBanner.image}
+          alt={currentBanner.title || 'Banner Image'}
+          className={styles.bannerImage}
+        />
+      </a>
+      <div className={styles.bannerCaption}>
+        {currentBanner.title}
       </div>
       <div className={styles.bannerDots}>
-        {images.map((_, idx) => (
+        {banners.map((_, idx) => (
           <span
             key={idx}
             className={`${styles.bannerDot} ${idx === current ? styles.activeBannerDot : ''}`}

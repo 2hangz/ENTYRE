@@ -2,84 +2,83 @@ import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import styles from '../styles/App.module.css';
-import {Link} from 'react-router-dom'
-
-function getImageUrl(media) {
-  return media?.data?.attributes?.url
-    ? 'http://localhost:1337' + media.data.attributes.url
-    : '';
-}
+import { Link } from 'react-router-dom';
 
 function ArticleCard({ article }) {
   return (
-    <div className="article-card">
-      <img
-        src={
-          article.attributes.image?.data?.attributes?.url
-            ? 'http://localhost:1337' + article.attributes.image.data.attributes.url
-            : ''
-        }
-        alt=""
-        className="article-img"
-      />
-      <div className="article-content">
-        <h3>{article.attributes.title}</h3>
-        <p>{article.attributes.summary}</p>
+    <Link
+      className={styles['article-card']}
+      to={`/outputs/${article.id}`}
+      key={article.id}
+    >
+      {article.imageUrl && (
+        <img
+          src={
+            article.imageUrl.startsWith('http')
+              ? article.imageUrl
+              : `http://localhost:3001${article.imageUrl}`
+          }
+          alt=""
+          className={styles['article-card-img']}
+        />
+      )}
+      <div>
+        <h3>{article.title}</h3>
+        <p>{article.summary}</p>
       </div>
-    </div>
+    </Link>
   );
 }
 
 function VideoCard({ video }) {
   const [showPlayer, setShowPlayer] = useState(false);
 
-  let thumbUrl = '';
-  if (Array.isArray(video.thumbnail) && video.thumbnail.length > 0) {
-    const thumbObj = video.thumbnail[0];
-    thumbUrl =
-      thumbObj.formats?.small?.url ||
-      thumbObj.formats?.thumbnail?.url ||
-      '';
-    if (thumbUrl && !thumbUrl.startsWith('http')) {
-      thumbUrl = 'http://localhost:1337' + thumbUrl;
-    }
-  }
-
-  const isYouTube = video.videoUrl.includes('youtube.com') || video.videoUrl.includes('youtu.be');
+  const isYouTube = video.videoUrl?.includes('youtube.com') || video.videoUrl?.includes('youtu.be');
 
   return (
     <div className={styles['video-cards']}>
       {!showPlayer ? (
-        <div className={styles['video-card']}
+        <div
+          className={styles['video-card']}
           onClick={() => setShowPlayer(true)}
         >
-          {thumbUrl && (
-            <img src={thumbUrl} alt="" className="video-thumb" />
+          {video.thumbnail && (
+            <img
+              src={video.thumbnail}
+              alt=""
+              className={styles['video-thumb']}
+            />
           )}
-          {/* play button */}
           <span className={styles['video-play-button']}>▶</span>
         </div>
       ) : (
-        <div className={styles['video-player']}>
+        <div
+          className={styles['video-player']}
+        >
           {isYouTube ? (
             <iframe
+              className={styles['video-frame']}
               src={video.videoUrl.replace('watch?v=', 'embed/')}
-              title={video.videoTitle}
+              title={video.title || video.videoTitle}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-            ></iframe>
+            />
           ) : (
-            <video width="100%" height="315" controls autoPlay>
+            <video
+              controls
+              autoPlay
+            >
               <source src={video.videoUrl} />
               Your browser does not support the video tag.
             </video>
           )}
         </div>
       )}
-      <div className={styles['video-title']}>{video.videoTitle}</div>
+      <div className={styles['video-title']}>{video.title || video.videoTitle}</div>
     </div>
   );
 }
+
 
 export default function KeyOutputs() {
   const [sections, setSections] = useState([]);
@@ -90,54 +89,43 @@ export default function KeyOutputs() {
     fetch(import.meta.env.BASE_URL + 'content/outputs.md')
       .then(res => res.text())
       .then(text => {
-        const sections = text.split('<!-- split -->');
-        setSections(sections);
+        const parts = text.split('<!-- split -->');
+        setSections(parts);
       });
-    fetch('http://localhost:1337/api/articles?populate=*')
+
+    fetch('http://localhost:3001/api/articles')
       .then(res => res.json())
       .then(data => {
-        console.log(data);
-        setArticles(data.data || []);
+        console.log('Articles:', data);
+        setArticles(data || []);
       });
-    fetch('http://localhost:1337/api/videos?populate=*')
+
+    fetch('http://localhost:3001/api/videos')
       .then(res => res.json())
-      .then(data => setVideos(data.data));
+      .then(data => setVideos(data));
   }, []);
 
-  return ( 
+  return (
     <div className={styles.intro_wrapper}>
-      <ReactMarkdown remarkPlugins={[remarkGfm]}>{sections[0]}</ReactMarkdown>
+      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+        {sections[0] || ''}
+      </ReactMarkdown>
+
       <div className={styles['article-list']}>
-      <div className={styles['article-cards']}>
+        <div className={styles['article-cards']}>
           {articles.map(article => (
-            <Link
-              className={styles['article-card']} 
-              to={`/outputs/${article.id}`}
-              key={article.id}
-              >
-              {Array.isArray(article.image) && article.image[0]?.url && (
-                <img
-                  src={'http://localhost:1337' + article.image[0].url}
-                  alt=""
-                  className={styles['article-card-img']}
-                />
-              )}
-              <div>
-                <h3>{article.articleTitle}</h3>
-                <p>{article.summary}</p>
-              </div>
-            </Link>
+            <ArticleCard key={article.id} article={article} />
           ))}
         </div>
       </div>
 
+      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+        {sections[1] || ''}
+      </ReactMarkdown>
 
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{sections[1]}</ReactMarkdown>
-
-          {videos.map(video => (
-            <VideoCard key={video.id} video={video} />
-          ))}
-      
+      {videos.map(video => (
+        <VideoCard key={video.id} video={video} />
+      ))}
     </div>
   );
 }
