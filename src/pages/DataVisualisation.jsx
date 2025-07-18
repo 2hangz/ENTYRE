@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from '../styles/App.module.css';
+import RadarChart from '../components/RadarChart';
 
 const tabList = [
   { label: <h2>Compare Pathways</h2>, key: "compare" },
@@ -11,7 +12,6 @@ const DataVisualisation = () => {
 
   return (
     <div className={styles.intro_wrapper}>
-      {/* <h1>Data Visualisation</h1> */}
       <div className={styles.tabBar}>
         {tabList.map(tab => (
           <button
@@ -26,13 +26,11 @@ const DataVisualisation = () => {
       <div>
         {activeTab === "compare" && (
           <div>
-            {/* Content for Compare pathways */}
-            <p>Compare pathways visualisation will appear here.</p>
+            <RadarChart />
           </div>
         )}
         {activeTab === "mcda" && (
           <div>
-            {/* Content for MCDA Tool */}
             <p>MCDA Tool visualisation will appear here.</p>
           </div>
         )}
