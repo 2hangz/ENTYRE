@@ -16,7 +16,7 @@ function ArticleCard({ article }) {
           src={
             article.imageUrl.startsWith('http')
               ? article.imageUrl
-              : `http://localhost:3001${article.imageUrl}`
+              : `https://entyre-backend.onrender.com${article.imageUrl}`
           }
           alt=""
           className={styles['article-card-img']}
