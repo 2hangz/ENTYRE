@@ -101,7 +101,7 @@ export default function KeyOutputs() {
         setArticles(data || []);
       });
 
-    fetch(`${baseApi}api/videos`)
+    fetch(`${baseApi}/api/videos`)
     
       .then(res => res.json())
       .then(data => setVideos(data));
