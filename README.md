@@ -94,7 +94,7 @@ Entyre Frontend is a modern, feature-rich web application built with [React](htt
 
 ## Further Information
 
-- **Backend Repository:** [entyre-backend](https://github.com/2hangz/ENTYRE/tree/main/entyre-backend)
+- **Backend Repository:** [entyre-backend](https://github.com/2hangz/entyre-backend)
 - **Deployment:** Supports static deployment via GitHub Pages or other static hosts.
 - **Customization:** Easily extendable for new MCDA methods, data sources, or content types.
 
