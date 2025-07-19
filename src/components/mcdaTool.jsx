@@ -1,6 +1,10 @@
-const { useState, useEffect, useRef } = React;
+import React, { useState, useEffect, useRef } from 'react';
+import * as d3 from 'd3';
+import * as XLSX from 'xlsx';
 
-function mcdaTool() {
+const baseApi = 'https://entyre-backend.onrender.com';
+
+function McdaTool() {
   // Data state management
   const [classData, setClassData] = useState([]); // Structured data by class/category
   const [projectNames, setProjectNames] = useState([]); // Project names for X-axis and sliders
@@ -32,7 +36,7 @@ function mcdaTool() {
     const fetchFileList = async () => {
       try {
         console.log('Fetching file list...');
-        const response = await fetch('/api/files');
+        const response = await fetch(`${baseApi}/api/files`);
         console.log('API response status:', response.status);
         
         if (response.ok) {
@@ -261,7 +265,7 @@ function mcdaTool() {
 
     const loadExcelData = async () => {
       try {
-        const response = await fetch(`/data/${selectedFile}`);
+        const response = await fetch(`${baseApi}/data/${selectedFile}`);
         const arrayBuffer = await response.arrayBuffer();
         const workbook = XLSX.read(arrayBuffer, { type: "array" });
 
@@ -1949,4 +1953,5 @@ function mcdaTool() {
     </div>
   );
 }
-ReactDOM.render(<App />, document.getElementById("root"));
+
+export default McdaTool;
