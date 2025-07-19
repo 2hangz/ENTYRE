@@ -84,6 +84,7 @@ export default function KeyOutputs() {
   const [sections, setSections] = useState([]);
   const [articles, setArticles] = useState([]);
   const [videos, setVideos] = useState([]);
+  const baseApi = 'https://entyre-backend.onrender.com';
 
   useEffect(() => {
     fetch(import.meta.env.BASE_URL + 'content/outputs.md')
@@ -93,14 +94,15 @@ export default function KeyOutputs() {
         setSections(parts);
       });
 
-    fetch('http://localhost:3001/api/articles')
+    fetch(`${baseApi}/api/articles`)
       .then(res => res.json())
       .then(data => {
         console.log('Articles:', data);
         setArticles(data || []);
       });
 
-    fetch('http://localhost:3001/api/videos')
+    fetch(`${baseApi}api/videos`)
+    
       .then(res => res.json())
       .then(data => setVideos(data));
   }, []);

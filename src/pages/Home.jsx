@@ -6,10 +6,11 @@ import styles from '../styles/App.module.css';
 const BannerCarousel = () => {
   const [banners, setBanners] = useState([]);
   const [current, setCurrent] = useState(0);
+  const baseApi = 'https://entyre-backend.onrender.com';
 
   useEffect(() => {
     let timer;
-    fetch('http://localhost:3001/api/banners')
+    fetch(`${baseApi}/api/banners`)
       .then(res => res.json())
       .then(data => {
         const bannersArr = Array.isArray(data) ? data : [];
