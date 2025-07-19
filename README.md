@@ -6,7 +6,7 @@ Entyre Frontend is a modern, feature-rich web application built with [React](htt
 
 ## Contributors
 
-- **Jiaming Li**: MCDA Tool
+- [**Jiaming Li**](https://github.com/JiamingLi-star): MCDA Tool
 - **Hang Zhou**: All other features
 
 ---
