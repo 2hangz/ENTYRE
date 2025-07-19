@@ -31,6 +31,7 @@ const DataVisualisation = () => {
         )}
         {activeTab === "mcda" && (
           <div>
+            <mcdaTool />
           </div>
         )}
       </div>
