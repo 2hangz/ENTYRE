@@ -5,11 +5,12 @@ import styles from '../styles/App.module.css';
 import { Link } from 'react-router-dom';
 
 function ArticleCard({ article }) {
+  // 检查是否有 _id，如果有则优先用 _id，否则用 id
+  const articleId = article._id || article.id;
   return (
     <Link
       className={styles['article-card']}
-      to={`/outputs/${article.id}`}
-      key={article.id}
+      to={`/outputs/${articleId}`}
     >
       {article.imageUrl && (
         <img
@@ -102,7 +103,6 @@ export default function KeyOutputs() {
       });
 
     fetch(`${baseApi}/api/videos`)
-    
       .then(res => res.json())
       .then(data => setVideos(data));
   }, []);
@@ -116,7 +116,7 @@ export default function KeyOutputs() {
       <div className={styles['article-list']}>
         <div className={styles['article-cards']}>
           {articles.map(article => (
-            <ArticleCard key={article.id} article={article} />
+            <ArticleCard key={article._id || article.id} article={article} />
           ))}
         </div>
       </div>
@@ -126,7 +126,7 @@ export default function KeyOutputs() {
       </ReactMarkdown>
 
       {videos.map(video => (
-        <VideoCard key={video.id} video={video} />
+        <VideoCard key={video.id || video._id} video={video} />
       ))}
     </div>
   );
