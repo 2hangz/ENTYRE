@@ -5,7 +5,6 @@ import styles from '../styles/App.module.css';
 import { Link } from 'react-router-dom';
 
 function ArticleCard({ article }) {
-  // 检查是否有 _id，如果有则优先用 _id，否则用 id
   const articleId = article._id || article.id;
   return (
     <Link

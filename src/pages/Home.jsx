@@ -6,11 +6,11 @@ import styles from '../styles/App.module.css';
 const BannerCarousel = () => {
   const [banners, setBanners] = useState([]);
   const [current, setCurrent] = useState(0);
-  const baseApi = 'https://entyre-backend.onrender.com';
+  const baseApi = 'https://entyre-backend.onrender.com/api/banners';
 
   useEffect(() => {
     let timer;
-    fetch(`${baseApi}/api/banners`)
+    fetch(`${baseApi}`)
       .then(res => res.json())
       .then(data => {
         const bannersArr = Array.isArray(data) ? data : [];
@@ -42,7 +42,10 @@ const BannerCarousel = () => {
     <div className={styles.bannerCarousel}>
       <a href={currentBanner.link || "#"} tabIndex={-1}>
         <img
-          src={currentBanner.image}
+          src={currentBanner.imageUrl.startsWith('http')
+            ? currentBanner.imageUrl
+            : `https://entyre-backend.onrender.com${currentBanner.imageUrl}`
+          }
           alt={currentBanner.title || 'Banner Image'}
           className={styles.bannerImage}
         />
