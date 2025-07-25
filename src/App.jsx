@@ -25,7 +25,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Navigate to="/home" replace />} />
               <Route path="/home" element={<Home />} />
-              <Route path="/about" element={<About />} />
+              {/* <Route path="/about" element={<About />} /> */}
               <Route path="/key-outputs" element={<KeyOutputs />} />
               <Route path="/outputs/:id" element={<ArticleDetail />} />
               <Route path="/pathway-explorer" element={<PathwayExplorer />} />

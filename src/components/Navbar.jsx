@@ -25,9 +25,9 @@ const Navbar = () => {
           <Link to="/home" className={`${styles.navLink} ${isActive('/home') ? styles.activeLink : ''}`}>
             Home
           </Link>
-          <Link to="/about" className={`${styles.navLink} ${isActive('/about') ? styles.activeLink : ''}`}>
+          {/* <Link to="/about" className={`${styles.navLink} ${isActive('/about') ? styles.activeLink : ''}`}>
             About
-          </Link>
+          </Link> */}
           <Link to="/key-outputs" className={`${styles.navLink} ${isActive('/key-outputs') ? styles.activeLink : ''}`}>
             Key Outputs
           </Link>
