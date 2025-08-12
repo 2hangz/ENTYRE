@@ -1,0 +1,487 @@
+.mcdaToolContainer {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
+}
+
+.mcdaHeader {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mcdaHeader h1 {
+  margin: 0 0 10px 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.mcdaHeader p {
+  margin: 0;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.scriptStatus {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  color: #856404;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.mcdaContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.mcdaLeftPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mcdaRightPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* File Selector Styles */
+.fileSelector {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5e9;
+}
+
+.fileSelectorHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.fileSelectorLabel {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.refreshButton {
+  padding: 8px 16px;
+  font-size: 14px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.refreshButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.loadingMessage {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+
+.successMessage {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #4caf50;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.fileInput {
+  width: 100%;
+  padding: 10px;
+  border: 2px dashed #ddd;
+  border-radius: 5px;
+  background: #f8f9fa;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.fileInput:hover {
+  border-color: #667eea;
+  background: #f0f2ff;
+}
+
+.selectedFile {
+  margin-top: 10px;
+  padding: 10px;
+  background: #e8f5e8;
+  border: 1px solid #4caf50;
+  border-radius: 5px;
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+/* Method Selector Styles */
+.methodSelector {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5e9;
+}
+
+.methodSelector h3 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.methodOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.methodOption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.methodOption input[type="radio"] {
+  margin: 0;
+}
+
+.methodOption label {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.parameterControls {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.parameterControl {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.parameterControl label {
+  min-width: 120px;
+  font-weight: 500;
+}
+
+.parameterControl input,
+.parameterControl select {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+/* Data Table Styles */
+.dataTable {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5e9;
+  overflow: hidden;
+}
+
+.tableHeader {
+  background: #f8f9fa;
+  padding: 15px 20px;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.tableHeader h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.tableContainer {
+  overflow-x: auto;
+  max-height: 400px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.table tr:hover {
+  background: #f8f9fa;
+}
+
+.weightCell {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.weightInput {
+  width: 60px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.weightSlider {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.lockButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.lockButton:hover {
+  color: #333;
+}
+
+.lockButton.locked {
+  color: #e74c3c;
+}
+
+.resetButton {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.resetButton:hover {
+  background: #c82333;
+}
+
+/* Chart Styles */
+.chartContainer {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5e9;
+}
+
+.chartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.chartHeader h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.chartTypeSelector {
+  display: flex;
+  gap: 10px;
+}
+
+.chartTypeButton {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.chartTypeButton.active {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+.chartTypeButton:hover {
+  background: #f8f9fa;
+}
+
+.chartTypeButton.active:hover {
+  background: #5a6fd8;
+}
+
+/* Image Gallery Styles */
+.imageGallery {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5e9;
+}
+
+.galleryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.galleryHeader h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.imageTypeSelector {
+  display: flex;
+  gap: 10px;
+}
+
+.imageTypeButton {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.imageTypeButton.active {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+.imageTypeButton:hover {
+  background: #f8f9fa;
+}
+
+.imageTypeButton.active:hover {
+  background: #5a6fd8;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.galleryItem {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.galleryItem:hover {
+  transform: scale(1.05);
+}
+
+.galleryItem img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.galleryItemTitle {
+  padding: 10px;
+  background: #f8f9fa;
+  font-size: 12px;
+  color: #333;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .mcdaContent {
+    grid-template-columns: 1fr;
+  }
+  
+  .mcdaHeader h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .mcdaToolContainer {
+    padding: 10px;
+  }
+  
+  .mcdaHeader {
+    padding: 15px;
+  }
+  
+  .mcdaHeader h1 {
+    font-size: 1.8rem;
+  }
+  
+  .mcdaHeader p {
+    font-size: 1rem;
+  }
+  
+  .tableContainer {
+    max-height: 300px;
+  }
+  
+  .table {
+    font-size: 12px;
+  }
+  
+  .table th,
+  .table td {
+    padding: 8px 5px;
+  }
+  
+  .weightInput {
+    width: 50px;
+  }
+}

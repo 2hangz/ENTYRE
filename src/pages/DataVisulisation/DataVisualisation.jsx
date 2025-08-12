@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import * as XLSX from 'xlsx';
-import styles from '../styles/App.module.css';
-import RadarChart from '../components/RadarChart';
-import McdaTool from '../components/mcdaTool';
+// import styles from 'styles/App.module.css';
+import RadarChart from './components/comparePathways';
+import McdaTool from './components/mcdaTool';
+import styles from './components/style/MCDA.module.css';
 
 const tabList = [
   { label: <h2>Compare Pathways</h2>, key: "compare" },

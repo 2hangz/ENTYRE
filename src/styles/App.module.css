@@ -236,6 +236,24 @@ margin-bottom: 8px;
   background: #fff;
   border: 2px solid #05243B;
 }
+
+.keyValue {
+  margin: -20px;
+}
+
+.keyValueKey {
+  display: inline-block;
+  height: 40px;
+  width: 220px;
+}
+.keyValueValue {
+  display: inline-block;
+  width: calc(100% - 220px);
+  vertical-align: middle;
+  word-break: break-word;
+  margin-left: 0;
+}
+
 /* KeyOutput Page */
 .article-cards {
   display: flex;
@@ -330,7 +348,7 @@ margin-bottom: 8px;
   border-radius: 12px;
   display: block;
 }
-
+              
  /* dataVisualisation */
  .tabButton {
   background: transparent;
@@ -368,3 +386,184 @@ margin-bottom: 8px;
   display: flex;
   gap: 8px;
 }
+
+/* Pathway Explorer Page */
+
+/* MCDA Page */
+  .class-chart {
+    background: #f8fafc;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px 0 rgba(80, 80, 120, 0.08);
+    transition: box-shadow 0.3s;
+  }
+  .class-chart:hover {
+    box-shadow: 0 4px 16px 0 rgba(80, 80, 120, 0.16);
+  }
+
+
+  .chart-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #3730a3;
+    text-align: center;
+    margin-bottom: 1rem;
+    letter-spacing: 0.02em;
+  }
+
+  .chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 1rem;
+  }
+
+  .chart-legend-item {
+    display: flex;
+    align-items: center;
+    margin-right: 16px;
+    margin-bottom: 4px;
+  }
+  .chart-legend-color {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    margin-right: 8px;
+  }
+  .chart-legend-label {
+    font-size: 14px;
+    color: #334155;
+  }
+
+
+  .pareto-optimal-text {
+    fill: #22c55e;
+    font-weight: bold;
+    font-size: 14px;
+    text-anchor: middle;
+  }
+
+
+  .mcda-table th, .mcda-table td {
+    border: 1px solid #e5e7eb;
+    padding: 0.75rem 1rem;
+    text-align: center;
+  }
+  .mcda-table th {
+    background: #f3f4f6;
+    color: #1e293b;
+    font-weight: 600;
+  }
+  .mcda-table tr:nth-child(even) {
+    background: #f9fafb;
+  }
+  .mcda-table tr:hover {
+    background: #f1f5f9;
+    transition: background 0.2s;
+  }
+
+
+  .weight-input {
+    width: 60px;
+    padding: 0.5rem;
+    border: 1px solid #c7d2fe;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    background: #fff;
+    transition: border 0.2s;
+  }
+  .weight-input:focus {
+    border: 1.5px solid #6366f1;
+    outline: none;
+    background: #eef2ff;
+  }
+  .weight-input[disabled] {
+    background: #e5e7eb;
+    color: #9ca3af;
+    cursor: not-allowed;
+  }
+
+
+  .weight-slider {
+    accent-color: #6366f1;
+    width: 100px;
+    margin: 0 8px;
+  }
+  .weight-slider[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+
+  .lock-btn {
+    color: #a1a1aa;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.2s;
+    margin-left: 4px;
+  }
+  .lock-btn:hover {
+    color: #6366f1;
+  }
+
+
+  .primary-btn {
+    background: linear-gradient(90deg, #6366f1 0%, #a21caf 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1.25rem;
+    font-weight: 600;
+    box-shadow: 0 2px 6px 0 rgba(80, 80, 120, 0.08);
+    transition: background 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .primary-btn:hover {
+    background: linear-gradient(90deg, #4f46e5 0%, #7c3aed 100%);
+    box-shadow: 0 4px 12px 0 rgba(80, 80, 120, 0.16);
+  }
+
+
+  .mcda-slider {
+    accent-color: #6366f1;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+
+  .pareto-panel {
+    background: linear-gradient(90deg, #f0fdf4 0%, #f0fdfa 100%);
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .pareto-panel-title {
+    color: #059669;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  .pareto-panel-optimal {
+    color: #22c55e;
+    font-weight: 600;
+  }
+  .pareto-panel-dominated {
+    color: #f59e42;
+    font-weight: 600;
+  }
+
+
+  @media (max-width: 1024px) {
+    .mcda-main-layout {
+      flex-direction: column;
+    }
+    .mcda-left-panel, .mcda-right-panel {
+      width: 100%;
+    }
+  }

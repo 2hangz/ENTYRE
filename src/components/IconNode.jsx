@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Handle, Position } from 'react-flow-renderer';
 
-export default function IconNode({ data }) {
+export default function CustomIconNode({ data }) {
     const [hovered, setHovered] = useState(false);
 
     const invisibleHandleStyle = {

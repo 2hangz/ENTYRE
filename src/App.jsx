@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import styles from './styles/App.module.css';
@@ -8,11 +7,12 @@ import Footer from './components/Footer';
 
 // Page views
 import Home from './pages/Home';
-import About from './pages/About';
 import KeyOutputs from './pages/KeyOutputs';
 import ArticleDetail from './pages/OutputDetail';
 import PathwayExplorer from './pages/PathwayExplorer';
-import DataVisualisation from './pages/DataVisualisation';
+import DataVisualisation from './pages/DataVisulisation/DataVisualisation';
+import ComparePathways from './pages/DataVisulisation/components/comparePathways';
+import McdaTool from './pages/DataVisulisation/components/mcdaTool';
 
 export default function App() {
   return (
@@ -25,10 +25,11 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Navigate to="/home" replace />} />
               <Route path="/home" element={<Home />} />
-              {/* <Route path="/about" element={<About />} /> */}
               <Route path="/key-outputs" element={<KeyOutputs />} />
               <Route path="/outputs/:id" element={<ArticleDetail />} />
               <Route path="/pathway-explorer" element={<PathwayExplorer />} />
+              <Route path="/data-visualisation/compare-pathways" element={<ComparePathways />} />
+              <Route path="/data-visualisation/mcda" element={<McdaTool />} />
               <Route path="/data-visualisation" element={<DataVisualisation />} />
             </Routes>
           </div>

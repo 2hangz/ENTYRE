@@ -1,21 +1,21 @@
-import React, { useState, useCallback, useMemo, useEffect } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import ReactFlow, { Background, Controls } from 'react-flow-renderer';
 import CustomPolylineEdge from '../components/CustomPolylineEdge';
+import IconNode from '../components/IconNode';
 import {
   pathwayInfoCard,
   flowContainer
 } from '../components/Style';
-
+import data from '../data.json';
 import styles from '../styles/App.module.css';
 import BackgroundImageNode from '../components/BackgroundImageNode';
-import ConnectedIconNode from '../components/ConnectedIconNode';
 
-const WORKFLOWS_API = 'https://entyre-backend.onrender.com/api/workflow';
 
-// Helper to render node details, including clickable links if present
+const { nodesData, edgeStyles, globalNodePositions, pathways } = data;
+
 function renderDetail(detail) {
   if (!detail) return null;
-
+  
   const linkMatch = detail.match(/\[(.*?)\]/);
   if (linkMatch) {
     const linkText = linkMatch[1];
@@ -41,60 +41,28 @@ function renderDetail(detail) {
       </div>
     );
   }
-
+  
   return <div>{detail}</div>;
 }
 
-
-const edgeTypes = {
-  customPolyline: CustomPolylineEdge,
-};
-
-const nodeTypes = {
-  iconNode: ConnectedIconNode,
-  backgroundImage: BackgroundImageNode,
-};
-
 const PathwayExplorer = () => {
-  const [workflows, setWorkflows] = useState({});
+  const edgeTypes = useMemo(() => ({
+    customPolyline: CustomPolylineEdge,
+  }), []);
+  
   const [selectedNode, setSelectedNode] = useState(null);
-  const [selectedPathway, setSelectedPathway] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [selectedPathway, setSelectedPathway] = useState('allPathways');
 
-  // Fetch workflows from backend on mount
-  useEffect(() => {
-    setLoading(true);
-    fetch(WORKFLOWS_API)
-      .then(res => {
-        if (!res.ok) throw new Error('Failed to fetch workflows');
-        return res.json();
-      })
-      .then(data => {
-        // Convert array to object keyed by _id or id
-        const obj = {};
-        data.forEach(wf => {
-          obj[wf._id || wf.id] = wf;
-        });
-        setWorkflows(obj);
-        // Default to first workflow if available
-        if (data.length > 0) {
-          setSelectedPathway(data[0]._id || data[0].id);
-        }
-        setLoading(false);
-      })
-      .catch(err => {
-        setError(err.message || 'Error loading workflows');
-        setLoading(false);
-      });
-  }, []);
+  const currentPathway = pathways[selectedPathway];
 
-  // Compose nodes for ReactFlow
-  const reactFlowNodes = useMemo(() => {
-    const currentPathway = workflows[selectedPathway];
-    if (!currentPathway) return [];
-    const currentPositions = currentPathway.nodePositions || {};
-    return (currentPathway.nodes || [])
+  const currentPositions = {
+    ...globalNodePositions,
+    ...(currentPathway.nodePositions || {})
+  };
+
+  const reactFlowNodes = useMemo(() =>
+    nodesData
+      .filter(node => currentPathway.nodes.includes(node.id))
       .map(node => {
         let style;
         let selectable;
@@ -103,6 +71,7 @@ const PathwayExplorer = () => {
             zIndex: -1,
             transition: 'width 0.2s, height 0.2s',
           };
+          // Default selectable to false for backgroundImage nodes unless explicitly set
           selectable = typeof node.selectable === 'boolean' ? node.selectable : false;
         } else {
           style = node.style || {
@@ -110,10 +79,6 @@ const PathwayExplorer = () => {
             height: node.id === 'civil_engineering' ? 200 : 100,
             zIndex: node.id === 'civil_engineering' ? 2 : 1,
             transition: 'width 0.2s, height 0.2s',
-            background: 'transparent',
-            border: 'none',
-            boxShadow: 'none',
-            padding: 0,
           };
           selectable = node.selectable;
         }
@@ -127,14 +92,12 @@ const PathwayExplorer = () => {
           selectable,
           focusable: node.focusable
         };
-      });
-  }, [workflows, selectedPathway]);
+      }),
+    [currentPathway]
+  );
 
-  // Compose edges for ReactFlow
-  const reactFlowEdges = useMemo(() => {
-    const currentPathway = workflows[selectedPathway];
-    if (!currentPathway) return [];
-    return (currentPathway.connections || []).map((conn) => ({
+  const reactFlowEdges = useMemo(() =>
+    currentPathway.connections.map((conn) => ({
       id: `e${conn.from}-${conn.to}`,
       source: conn.from,
       target: conn.to,
@@ -142,88 +105,35 @@ const PathwayExplorer = () => {
       targetHandle: conn.targetHandle,
       animated: false,
       type: conn.edgeType || 'step',
-      style: conn.edgeStyle ? (currentPathway.edgeStyles && currentPathway.edgeStyles[conn.edgeStyle]) : (currentPathway.edgeStyles && currentPathway.edgeStyles.default),
+      style: conn.edgeStyle ? edgeStyles[conn.edgeStyle] : edgeStyles.default,
       markerEnd: {
         type: 'arrowclosed',
         width: 10,
         height: 10,
-        color: (conn.edgeStyle && currentPathway.edgeStyles && currentPathway.edgeStyles[conn.edgeStyle]?.stroke) ? currentPathway.edgeStyles[conn.edgeStyle].stroke : '#000000',
+        color: (conn.edgeStyle && edgeStyles[conn.edgeStyle]?.stroke) ? edgeStyles[conn.edgeStyle].stroke : '#000000',
       },
       label: conn.label || undefined,
       labelStyle: conn.label ? { fill: 'red', fontWeight: 600 } : undefined,
-    }));
-  }, [workflows, selectedPathway]);
+    })),
+    [currentPathway]
+  );
+
+  const nodeTypes = useMemo(() => ({
+    iconNode: IconNode,
+    backgroundImage: BackgroundImageNode,
+  }), []);
 
   const onNodeClick = useCallback((event, node) => {
     setSelectedNode(node.data);
   }, []);
 
-  // Loading state
-  if (loading) {
-    return (
-      <div className={styles.intro_wrapper}>
-        <h1>ELTs Valorisation Pathways</h1>
-        <div>Loading pathways...</div>
-        <div style={{ marginTop: 12, color: '#888', fontSize: 14 }}>
-          <span>
-            Fetching workflow data from: <code>{WORKFLOWS_API}</code>
-          </span>
-        </div>
-      </div>
-    );
-  }
-  // Error state
-  if (error) {
-    return (
-      <div className={styles.intro_wrapper}>
-        <h1>ELTs Valorisation Pathways</h1>
-        <div style={{ color: 'red' }}>Error: {error}</div>
-        <div style={{ marginTop: 12, color: '#888', fontSize: 14 }}>
-          <span>
-            Tried to fetch workflow data from: <code>{WORKFLOWS_API}</code>
-          </span>
-        </div>
-      </div>
-    );
-  }
-  // No data state
-  if (!workflows || Object.keys(workflows).length === 0) {
-    return (
-      <div className={styles.intro_wrapper}>
-        <h1>ELTs Valorisation Pathways</h1>
-        <div>No pathways found.</div>
-        <div style={{ marginTop: 12, color: '#888', fontSize: 14 }}>
-          <span>
-            No data found at: <code>{WORKFLOWS_API}</code>
-          </span>
-        </div>
-      </div>
-    );
-  }
-
-  const currentPathway = workflows[selectedPathway];
-
-  // Defensive: If no currentPathway, show nothing
-  if (!currentPathway) {
-    return (
-      <div className={styles.intro_wrapper}>
-        <h1>ELTs Valorisation Pathways</h1>
-        <div>No pathway selected.</div>
-        <div style={{ marginTop: 12, color: '#888', fontSize: 14 }}>
-          <span>
-            Data is fetched from: <code>{WORKFLOWS_API}</code>
-          </span>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className={styles.intro_wrapper}>
       <h1>ELTs Valorisation Pathways</h1>
-      {/* Pathways selector */}
+
+      {/* pathways buttons */}
       <div className={styles.pathway_selector}>
-        {Object.entries(workflows).map(([key, p]) => (
+        {Object.entries(pathways).map(([key, p]) => (
           <button
             key={key}
             onClick={() => setSelectedPathway(key)}
@@ -246,7 +156,7 @@ const PathwayExplorer = () => {
       </div>
 
       <div style={{display: 'flex', flexDirection: 'row', gap: 12}}>
-        {/* Pathway information */}
+        {/* pathways information Container */}
         <div style={pathwayInfoCard}>
           <div style={{ fontWeight: 'bold', fontSize: 20 }}>{currentPathway.name}</div>
           <div style={{ color: '#666', margin: '4px 0 8px 0' }}>
@@ -258,14 +168,13 @@ const PathwayExplorer = () => {
           </div>
           <div style={{ color: '#444' }}>{currentPathway.description}</div>
         </div>
-        {/* Node information */}
+        
+         {/* nodes information Container */}
         <div className={styles.nodeDetailCard}>
           {selectedNode ? (
             <>
               <div className={styles.nodeDetailCardLabel}>{selectedNode.label || selectedNode.id}</div>
-              <div className={styles.nodeDetailCardContent}>
-                {renderDetail(selectedNode.detail)}
-              </div>
+              <div className={styles.nodeDetailCardContent}>{renderDetail(selectedNode.detail)}</div>
             </>
           ) : (
             <div style={{ color: '#888' }}>Click a node to see details here.</div>
@@ -290,4 +199,4 @@ const PathwayExplorer = () => {
   );
 };
 
-export default PathwayExplorer;
+export default PathwayExplorer; 
