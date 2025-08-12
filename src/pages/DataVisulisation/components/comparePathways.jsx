@@ -1,18 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 
+// Changes:
+// 1. Fetch available scenarios from backend instead of hardcoding, to avoid 404 errors.
+// 2. All UI and error messages are in English.
+
 const API_BASE = "https://mcda-analysis.onrender.com";
-const SCENARIOS = [
-  "Econ_G",
-  "Econ_L",
-  "Enviro_G",
-  "Enviro_L",
-  "Tech_G",
-  "Tech_L",
-  "Equal_G",
-  "Equal_L",
-  "Hier_G",
-  "Hier_L",
-];
 
 function BarChartLarge({ data, selected, onSelect }) {
   if (!data || !data.length) return null;
@@ -87,30 +79,70 @@ function BarChartLarge({ data, selected, onSelect }) {
 }
 
 export default function ComparePathways() {
-  const [scenarioId, setScenarioId] = useState("Test");
+  const [scenarioId, setScenarioId] = useState("");
   const [selected, setSelected] = useState([]);
-  const [raw, setRaw] = useState(null); // Raw data from the tool
+  const [raw, setRaw] = useState(null);
   const [error, setError] = useState("");
+  const [scenarioGroups, setScenarioGroups] = useState({ Global: [], Local: [] });
 
-  // Fetch Weighted Sum Stacked Bar results (only use total/parts)
+  // Fetch available scenarios from backend
   useEffect(() => {
+    let cancelled = false;
+    async function fetchScenarios() {
+      try {
+        const url = `${API_BASE}/api/wsm/scenarios`;
+        const r = await fetch(url, { mode: "cors" });
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        const data = await r.json();
+        if (!cancelled && Array.isArray(data.scenarios)) {
+          setScenarioGroups({
+            Global: data.scenarios.filter((id) => id.endsWith("_G")),
+            Local: data.scenarios.filter((id) => id.endsWith("_L")),
+          });
+          if (data.scenarios.length > 0) setScenarioId(data.scenarios[0]);
+        }
+      } catch (e) {
+        if (!cancelled) {
+          setError(
+            "Failed to fetch available scenarios. Please try again later."
+          );
+        }
+      }
+    }
+    fetchScenarios();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // Fetch ranking data for the selected scenario
+  useEffect(() => {
+    if (!scenarioId) return;
     let cancelled = false;
     async function load() {
       setError("");
       setRaw(null);
       try {
-        // Assume this endpoint exists: /api/wsm?scenario=xx
         const url = `${API_BASE}/api/wsm?scenario=${encodeURIComponent(
           scenarioId
         )}`;
         const r = await fetch(url, { mode: "cors" });
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        if (!r.ok) {
+          if (r.status === 404) {
+            throw new Error(
+              `Scenario "${scenarioId}" not found on the backend (404).`
+            );
+          } else {
+            throw new Error(`HTTP ${r.status}`);
+          }
+        }
         const data = await r.json();
         if (!cancelled) setRaw(data);
       } catch (e) {
         if (!cancelled)
           setError(
-            "Failed to fetch ranking data from MCDA tool (possibly CORS or service is down)."
+            e.message ||
+              "Failed to fetch ranking data from MCDA tool (possibly CORS or service is down)."
           );
       }
     }
@@ -156,14 +188,6 @@ export default function ComparePathways() {
     );
   };
 
-  const scenarioGroups = useMemo(
-    () => ({
-      Global: SCENARIOS.filter((id) => id.endsWith("_G")),
-      Local: SCENARIOS.filter((id) => id.endsWith("_L")),
-    }),
-    []
-  );
-
   return (
     <div style={{ maxWidth: 1100, margin: "0 auto", padding: "32px 12px" }}>
       <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 10 }}>
@@ -189,27 +213,31 @@ export default function ComparePathways() {
           >
             Global:
           </span>
-          {scenarioGroups.Global.map((id) => (
-            <button
-              key={id}
-              onClick={() => {
-                setScenarioId(id);
-                setSelected([]);
-              }}
-              aria-pressed={scenarioId === id}
-              style={{
-                padding: "8px 18px",
-                borderRadius: 8,
-                border: "1px solid #bbb",
-                background: scenarioId === id ? "#eef3fb" : "#fff",
-                cursor: "pointer",
-                fontSize: 16,
-                fontWeight: scenarioId === id ? 600 : 400,
-              }}
-            >
-              {id.replace("_G", "")}
-            </button>
-          ))}
+          {scenarioGroups.Global.length === 0 ? (
+            <span style={{ color: "#888" }}>No available Global scenarios</span>
+          ) : (
+            scenarioGroups.Global.map((id) => (
+              <button
+                key={id}
+                onClick={() => {
+                  setScenarioId(id);
+                  setSelected([]);
+                }}
+                aria-pressed={scenarioId === id}
+                style={{
+                  padding: "8px 18px",
+                  borderRadius: 8,
+                  border: "1px solid #bbb",
+                  background: scenarioId === id ? "#eef3fb" : "#fff",
+                  cursor: "pointer",
+                  fontSize: 16,
+                  fontWeight: scenarioId === id ? 600 : 400,
+                }}
+              >
+                {id.replace("_G", "")}
+              </button>
+            ))
+          )}
         </div>
         <div
           style={{
@@ -228,27 +256,31 @@ export default function ComparePathways() {
           >
             Local:
           </span>
-          {scenarioGroups.Local.map((id) => (
-            <button
-              key={id}
-              onClick={() => {
-                setScenarioId(id);
-                setSelected([]);
-              }}
-              aria-pressed={scenarioId === id}
-              style={{
-                padding: "8px 18px",
-                borderRadius: 8,
-                border: "1px solid #bbb",
-                background: scenarioId === id ? "#eef3fb" : "#fff",
-                cursor: "pointer",
-                fontSize: 16,
-                fontWeight: scenarioId === id ? 600 : 400,
-              }}
-            >
-              {id.replace("_L", "")}
-            </button>
-          ))}
+          {scenarioGroups.Local.length === 0 ? (
+            <span style={{ color: "#888" }}>No available Local scenarios</span>
+          ) : (
+            scenarioGroups.Local.map((id) => (
+              <button
+                key={id}
+                onClick={() => {
+                  setScenarioId(id);
+                  setSelected([]);
+                }}
+                aria-pressed={scenarioId === id}
+                style={{
+                  padding: "8px 18px",
+                  borderRadius: 8,
+                  border: "1px solid #bbb",
+                  background: scenarioId === id ? "#eef3fb" : "#fff",
+                  cursor: "pointer",
+                  fontSize: 16,
+                  fontWeight: scenarioId === id ? 600 : 400,
+                }}
+              >
+                {id.replace("_L", "")}
+              </button>
+            ))
+          )}
         </div>
       </div>
 
