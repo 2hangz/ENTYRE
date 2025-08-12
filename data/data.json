@@ -1,0 +1,836 @@
+{
+    "version": "V7",
+    "updated": "2025-08-11",
+    "scenarios": [
+      {
+        "id": "Econ_G",
+        "label": "Econ • G",
+        "alternatives": [
+          {
+            "id": "crumb_rubber_1",
+            "name": "Crumb rubber-1",
+            "scores": {
+              "human_health": 0.2460754,
+              "ecosystem": 0.0306556,
+              "resources": 0.008958549481
+            },
+            "rank": 6,
+            "total": 0.095229849827
+          },
+          {
+            "id": "crumb_rubber_2",
+            "name": "Crumb rubber-2",
+            "scores": {
+              "human_health": 0.1917491,
+              "ecosystem": 0.014543,
+              "resources": 0.0
+            },
+            "rank": 7,
+            "total": 0.06876403333333334
+          },
+          {
+            "id": "devulcanisation",
+            "name": "Devulcanisation",
+            "scores": {
+              "human_health": 0.7271673,
+              "ecosystem": 0.105636,
+              "resources": 0.04679665789
+            },
+            "rank": 1,
+            "total": 0.2931999859633333
+          },
+          {
+            "id": "rcb_from_pyrolysis",
+            "name": "rCB from Pyrolysis",
+            "scores": {
+              "human_health": 0.3769342,
+              "ecosystem": 0.0463247,
+              "resources": 0.04309898707
+            },
+            "rank": 2,
+            "total": 0.15545262902333332
+          },
+          {
+            "id": "saf_from_pyrolysis",
+            "name": "SAF from Pyrolysis",
+            "scores": {
+              "human_health": 0.3503565,
+              "ecosystem": 0.0385424,
+              "resources": 0.03258613539
+            },
+            "rank": 4,
+            "total": 0.14049501179666665
+          },
+          {
+            "id": "elt_in_power_plant",
+            "name": "ELT in Power Plant",
+            "scores": {
+              "human_health": 0.91503,
+              "ecosystem": 0.0120408,
+              "resources": 0.02790908253
+            },
+            "rank": 3,
+            "total": 0.31832662751
+          },
+          {
+            "id": "elt_in_cement_kiln",
+            "name": "ELT in Cement kiln",
+            "scores": {
+              "human_health": 0.9838072,
+              "ecosystem": 0.0271238,
+              "resources": 0.03554899622
+            },
+            "rank": 5,
+            "total": 0.3488266654066667
+          }
+        ]
+      },
+      {
+        "id": "Econ_L",
+        "label": "Econ • L",
+        "alternatives": [
+          {
+            "id": "crumb_rubber_1",
+            "name": "Crumb rubber-1",
+            "scores": {
+              "human_health": 6.85887815552925,
+              "ecosystem": 19.8886267671846,
+              "resources": 19.6408930003516
+            },
+            "rank": 6,
+            "total": 15.462799307688485
+          },
+          {
+            "id": "crumb_rubber_2",
+            "name": "Crumb rubber-2",
+            "scores": {
+              "human_health": 0.0,
+              "ecosystem": 2.67342769714686,
+              "resources": 0.0
+            },
+            "rank": 7,
+            "total": 0.89114256571562
+          },
+          {
+            "id": "devulcanisation",
+            "name": "Devulcanisation",
+            "scores": {
+              "human_health": 67.5983491615072,
+              "ecosystem": 100.0,
+              "resources": 100.0
+            },
+            "rank": 1,
+            "total": 89.1994497205024
+          },
+          {
+            "id": "rcb_from_pyrolysis",
+            "name": "rCB from Pyrolysis",
+            "scores": {
+              "human_health": 23.3802419292221,
+              "ecosystem": 36.6299767509445,
+              "resources": 92.1470301352807
+            },
+            "rank": 2,
+            "total": 50.71908293848244
+          },
+          {
+            "id": "saf_from_pyrolysis",
+            "name": "SAF from Pyrolysis",
+            "scores": {
+              "human_health": 20.0247178837007,
+              "ecosystem": 28.315127271484,
+              "resources": 69.8202435027964
+            },
+            "rank": 3,
+            "total": 39.386696219327035
+          },
+          {
+            "id": "elt_in_power_plant",
+            "name": "ELT in Power Plant",
+            "scores": {
+              "human_health": 91.3166470994994,
+              "ecosystem": 0.0,
+              "resources": 59.8873000491444
+            },
+            "rank": 4,
+            "total": 50.401315716214604
+          },
+          {
+            "id": "elt_in_cement_kiln",
+            "name": "ELT in Cement kiln",
+            "scores": {
+              "human_health": 100.0,
+              "ecosystem": 16.1151426568884,
+              "resources": 76.1126524120749
+            },
+            "rank": 5,
+            "total": 64.07593168965444
+          }
+        ]
+      },
+      {
+        "id": "Enviro_G",
+        "label": "Enviro • G",
+        "alternatives": [
+          {
+            "id": "crumb_rubber_1",
+            "name": "Crumb rubber-1",
+            "scores": {
+              "human_health": 0.2460754,
+              "ecosystem": 0.0306556,
+              "resources": 0.008958549481
+            },
+            "rank": 3,
+            "total": 0.095229849827
+          },
+          {
+            "id": "crumb_rubber_2",
+            "name": "Crumb rubber-2",
+            "scores": {
+              "human_health": 0.1917491,
+              "ecosystem": 0.014543,
+              "resources": 0.0
+            },
+            "rank": 7,
+            "total": 0.06876403333333334
+          },
+          {
+            "id": "devulcanisation",
+            "name": "Devulcanisation",
+            "scores": {
+              "human_health": 0.7271673,
+              "ecosystem": 0.105636,
+              "resources": 0.04679665789
+            },
+            "rank": 6,
+            "total": 0.2931999859633333
+          },
+          {
+            "id": "rcb_from_pyrolysis",
+            "name": "rCB from Pyrolysis",
+            "scores": {
+              "human_health": 0.3769342,
+              "ecosystem": 0.0463247,
+              "resources": 0.04309898707
+            },
+            "rank": 4,
+            "total": 0.15545262902333332
+          },
+          {
+            "id": "saf_from_pyrolysis",
+            "name": "SAF from Pyrolysis",
+            "scores": {
+              "human_health": 0.3503565,
+              "ecosystem": 0.0385424,
+              "resources": 0.03258613539
+            },
+            "rank": 5,
+            "total": 0.14049501179666665
+          },
+          {
+            "id": "elt_in_power_plant",
+            "name": "ELT in Power Plant",
+            "scores": {
+              "human_health": 0.91503,
+              "ecosystem": 0.0120408,
+              "resources": 0.02790908253
+            },
+            "rank": 1,
+            "total": 0.31832662751
+          },
+          {
+            "id": "elt_in_cement_kiln",
+            "name": "ELT in Cement kiln",
+            "scores": {
+              "human_health": 0.9838072,
+              "ecosystem": 0.0271238,
+              "resources": 0.03554899622
+            },
+            "rank": 2,
+            "total": 0.3488266654066667
+          }
+        ]
+      },
+      {
+        "id": "Enviro_L",
+        "label": "Enviro • L",
+        "alternatives": [
+          {
+            "id": "crumb_rubber_1",
+            "name": "Crumb rubber-1",
+            "scores": {
+              "human_health": 6.85887815552925,
+              "ecosystem": 19.8886267671846,
+              "resources": 19.6408930003516
+            },
+            "rank": 3,
+            "total": 15.462799307688485
+          },
+          {
+            "id": "crumb_rubber_2",
+            "name": "Crumb rubber-2",
+            "scores": {
+              "human_health": 0.0,
+              "ecosystem": 2.67342769714686,
+              "resources": 0.0
+            },
+            "rank": 4,
+            "total": 0.89114256571562
+          },
+          {
+            "id": "devulcanisation",
+            "name": "Devulcanisation",
+            "scores": {
+              "human_health": 67.5983491615072,
+              "ecosystem": 100.0,
+              "resources": 100.0
+            },
+            "rank": 7,
+            "total": 89.1994497205024
+          },
+          {
+            "id": "rcb_from_pyrolysis",
+            "name": "rCB from Pyrolysis",
+            "scores": {
+              "human_health": 23.3802419292221,
+              "ecosystem": 36.6299767509445,
+              "resources": 92.1470301352807
+            },
+            "rank": 6,
+            "total": 50.71908293848244
+          },
+          {
+            "id": "saf_from_pyrolysis",
+            "name": "SAF from Pyrolysis",
+            "scores": {
+              "human_health": 20.0247178837007,
+              "ecosystem": 28.315127271484,
+              "resources": 69.8202435027964
+            },
+            "rank": 1,
+            "total": 39.386696219327035
+          },
+          {
+            "id": "elt_in_power_plant",
+            "name": "ELT in Power Plant",
+            "scores": {
+              "human_health": 91.3166470994994,
+              "ecosystem": 0.0,
+              "resources": 59.8873000491444
+            },
+            "rank": 5,
+            "total": 50.401315716214604
+          },
+          {
+            "id": "elt_in_cement_kiln",
+            "name": "ELT in Cement kiln",
+            "scores": {
+              "human_health": 100.0,
+              "ecosystem": 16.1151426568884,
+              "resources": 76.1126524120749
+            },
+            "rank": 2,
+            "total": 64.07593168965444
+          }
+        ]
+      },
+      {
+        "id": "Equal_G",
+        "label": "Equal • G",
+        "alternatives": [
+          {
+            "id": "crumb_rubber_1",
+            "name": "Crumb rubber-1",
+            "scores": {
+              "human_health": 0.2460754,
+              "ecosystem": 0.0306556,
+              "resources": 0.008958549481
+            },
+            "rank": 7,
+            "total": 0.095229849827
+          },
+          {
+            "id": "crumb_rubber_2",
+            "name": "Crumb rubber-2",
+            "scores": {
+              "human_health": 0.1917491,
+              "ecosystem": 0.014543,
+              "resources": 0.0
+            },
+            "rank": 6,
+            "total": 0.06876403333333334
+          },
+          {
+            "id": "devulcanisation",
+            "name": "Devulcanisation",
+            "scores": {
+              "human_health": 0.7271673,
+              "ecosystem": 0.105636,
+              "resources": 0.04679665789
+            },
+            "rank": 1,
+            "total": 0.2931999859633333
+          },
+          {
+            "id": "rcb_from_pyrolysis",
+            "name": "rCB from Pyrolysis",
+            "scores": {
+              "human_health": 0.3769342,
+              "ecosystem": 0.0463247,
+              "resources": 0.04309898707
+            },
+            "rank": 2,
+            "total": 0.15545262902333332
+          },
+          {
+            "id": "saf_from_pyrolysis",
+            "name": "SAF from Pyrolysis",
+            "scores": {
+              "human_health": 0.3503565,
+              "ecosystem": 0.0385424,
+              "resources": 0.03258613539
+            },
+            "rank": 4,
+            "total": 0.14049501179666665
+          },
+          {
+            "id": "elt_in_power_plant",
+            "name": "ELT in Power Plant",
+            "scores": {
+              "human_health": 0.91503,
+              "ecosystem": 0.0120408,
+              "resources": 0.02790908253
+            },
+            "rank": 3,
+            "total": 0.31832662751
+          },
+          {
+            "id": "elt_in_cement_kiln",
+            "name": "ELT in Cement kiln",
+            "scores": {
+              "human_health": 0.9838072,
+              "ecosystem": 0.0271238,
+              "resources": 0.03554899622
+            },
+            "rank": 5,
+            "total": 0.3488266654066667
+          }
+        ]
+      },
+      {
+        "id": "Equal_L",
+        "label": "Equal • L",
+        "alternatives": [
+          {
+            "id": "crumb_rubber_1",
+            "name": "Crumb rubber-1",
+            "scores": {
+              "human_health": 6.85887815552925,
+              "ecosystem": 19.8886267671846,
+              "resources": 19.6408930003516
+            },
+            "rank": 3,
+            "total": 15.462799307688485
+          },
+          {
+            "id": "crumb_rubber_2",
+            "name": "Crumb rubber-2",
+            "scores": {
+              "human_health": 0.0,
+              "ecosystem": 2.67342769714686,
+              "resources": 0.0
+            },
+            "rank": 7,
+            "total": 0.89114256571562
+          },
+          {
+            "id": "devulcanisation",
+            "name": "Devulcanisation",
+            "scores": {
+              "human_health": 67.5983491615072,
+              "ecosystem": 100.0,
+              "resources": 100.0
+            },
+            "rank": 6,
+            "total": 89.1994497205024
+          },
+          {
+            "id": "rcb_from_pyrolysis",
+            "name": "rCB from Pyrolysis",
+            "scores": {
+              "human_health": 23.3802419292221,
+              "ecosystem": 36.6299767509445,
+              "resources": 92.1470301352807
+            },
+            "rank": 1,
+            "total": 50.71908293848244
+          },
+          {
+            "id": "saf_from_pyrolysis",
+            "name": "SAF from Pyrolysis",
+            "scores": {
+              "human_health": 20.0247178837007,
+              "ecosystem": 28.315127271484,
+              "resources": 69.8202435027964
+            },
+            "rank": 4,
+            "total": 39.386696219327035
+          },
+          {
+            "id": "elt_in_power_plant",
+            "name": "ELT in Power Plant",
+            "scores": {
+              "human_health": 91.3166470994994,
+              "ecosystem": 0.0,
+              "resources": 59.8873000491444
+            },
+            "rank": 2,
+            "total": 50.401315716214604
+          },
+          {
+            "id": "elt_in_cement_kiln",
+            "name": "ELT in Cement kiln",
+            "scores": {
+              "human_health": 100.0,
+              "ecosystem": 16.1151426568884,
+              "resources": 76.1126524120749
+            },
+            "rank": 5,
+            "total": 64.07593168965444
+          }
+        ]
+      },
+      {
+        "id": "Hier_G",
+        "label": "Hier • G",
+        "alternatives": [
+          {
+            "id": "crumb_rubber_1",
+            "name": "Crumb rubber-1",
+            "scores": {
+              "human_health": 0.2460754,
+              "ecosystem": 0.0306556,
+              "resources": 0.008958549481
+            },
+            "rank": 7,
+            "total": 0.095229849827
+          },
+          {
+            "id": "crumb_rubber_2",
+            "name": "Crumb rubber-2",
+            "scores": {
+              "human_health": 0.1917491,
+              "ecosystem": 0.014543,
+              "resources": 0.0
+            },
+            "rank": 6,
+            "total": 0.06876403333333334
+          },
+          {
+            "id": "devulcanisation",
+            "name": "Devulcanisation",
+            "scores": {
+              "human_health": 0.7271673,
+              "ecosystem": 0.105636,
+              "resources": 0.04679665789
+            },
+            "rank": 1,
+            "total": 0.2931999859633333
+          },
+          {
+            "id": "rcb_from_pyrolysis",
+            "name": "rCB from Pyrolysis",
+            "scores": {
+              "human_health": 0.3769342,
+              "ecosystem": 0.0463247,
+              "resources": 0.04309898707
+            },
+            "rank": 2,
+            "total": 0.15545262902333332
+          },
+          {
+            "id": "saf_from_pyrolysis",
+            "name": "SAF from Pyrolysis",
+            "scores": {
+              "human_health": 0.3503565,
+              "ecosystem": 0.0385424,
+              "resources": 0.03258613539
+            },
+            "rank": 4,
+            "total": 0.14049501179666665
+          },
+          {
+            "id": "elt_in_power_plant",
+            "name": "ELT in Power Plant",
+            "scores": {
+              "human_health": 0.91503,
+              "ecosystem": 0.0120408,
+              "resources": 0.02790908253
+            },
+            "rank": 3,
+            "total": 0.31832662751
+          },
+          {
+            "id": "elt_in_cement_kiln",
+            "name": "ELT in Cement kiln",
+            "scores": {
+              "human_health": 0.9838072,
+              "ecosystem": 0.0271238,
+              "resources": 0.03554899622
+            },
+            "rank": 5,
+            "total": 0.3488266654066667
+          }
+        ]
+      },
+      {
+        "id": "Hier_L",
+        "label": "Hier • L",
+        "alternatives": [
+          {
+            "id": "crumb_rubber_1",
+            "name": "Crumb rubber-1",
+            "scores": {
+              "human_health": 6.858878156,
+              "ecosystem": 19.88862677,
+              "resources": 19.640893
+            },
+            "rank": 7,
+            "total": 15.462799308666666
+          },
+          {
+            "id": "crumb_rubber_2",
+            "name": "Crumb rubber-2",
+            "scores": {
+              "human_health": 0.0,
+              "ecosystem": 2.673427697,
+              "resources": 0.0
+            },
+            "rank": 6,
+            "total": 0.8911425656666667
+          },
+          {
+            "id": "devulcanisation",
+            "name": "Devulcanisation",
+            "scores": {
+              "human_health": 67.59834916,
+              "ecosystem": 100.0,
+              "resources": 100.0
+            },
+            "rank": 3,
+            "total": 89.19944972
+          },
+          {
+            "id": "rcb_from_pyrolysis",
+            "name": "rCB from Pyrolysis",
+            "scores": {
+              "human_health": 23.38024193,
+              "ecosystem": 36.62997675,
+              "resources": 92.14703014
+            },
+            "rank": 1,
+            "total": 50.71908294
+          },
+          {
+            "id": "saf_from_pyrolysis",
+            "name": "SAF from Pyrolysis",
+            "scores": {
+              "human_health": 20.02471788,
+              "ecosystem": 28.31512727,
+              "resources": 69.8202435
+            },
+            "rank": 2,
+            "total": 39.38669621666667
+          },
+          {
+            "id": "elt_in_power_plant",
+            "name": "ELT in Power Plant",
+            "scores": {
+              "human_health": 91.3166471,
+              "ecosystem": 0.0,
+              "resources": 59.88730005
+            },
+            "rank": 4,
+            "total": 50.401315716666666
+          },
+          {
+            "id": "elt_in_cement_kiln",
+            "name": "ELT in Cement kiln",
+            "scores": {
+              "human_health": 100.0,
+              "ecosystem": 16.11514266,
+              "resources": 76.11265241
+            },
+            "rank": 5,
+            "total": 64.07593169
+          }
+        ]
+      },
+      {
+        "id": "Tech_G",
+        "label": "Tech • G",
+        "alternatives": [
+          {
+            "id": "crumb_rubber_1",
+            "name": "Crumb rubber-1",
+            "scores": {
+              "human_health": 0.2460754,
+              "ecosystem": 0.0306556,
+              "resources": 0.008958549481
+            },
+            "rank": 6,
+            "total": 0.095229849827
+          },
+          {
+            "id": "crumb_rubber_2",
+            "name": "Crumb rubber-2",
+            "scores": {
+              "human_health": 0.1917491,
+              "ecosystem": 0.014543,
+              "resources": 0.0
+            },
+            "rank": 7,
+            "total": 0.06876403333333334
+          },
+          {
+            "id": "devulcanisation",
+            "name": "Devulcanisation",
+            "scores": {
+              "human_health": 0.7271673,
+              "ecosystem": 0.105636,
+              "resources": 0.04679665789
+            },
+            "rank": 1,
+            "total": 0.2931999859633333
+          },
+          {
+            "id": "rcb_from_pyrolysis",
+            "name": "rCB from Pyrolysis",
+            "scores": {
+              "human_health": 0.3769342,
+              "ecosystem": 0.0463247,
+              "resources": 0.04309898707
+            },
+            "rank": 2,
+            "total": 0.15545262902333332
+          },
+          {
+            "id": "saf_from_pyrolysis",
+            "name": "SAF from Pyrolysis",
+            "scores": {
+              "human_health": 0.3503565,
+              "ecosystem": 0.0385424,
+              "resources": 0.03258613539
+            },
+            "rank": 4,
+            "total": 0.14049501179666665
+          },
+          {
+            "id": "elt_in_power_plant",
+            "name": "ELT in Power Plant",
+            "scores": {
+              "human_health": 0.91503,
+              "ecosystem": 0.0120408,
+              "resources": 0.02790908253
+            },
+            "rank": 3,
+            "total": 0.31832662751
+          },
+          {
+            "id": "elt_in_cement_kiln",
+            "name": "ELT in Cement kiln",
+            "scores": {
+              "human_health": 0.9838072,
+              "ecosystem": 0.0271238,
+              "resources": 0.03554899622
+            },
+            "rank": 5,
+            "total": 0.3488266654066667
+          }
+        ]
+      },
+      {
+        "id": "Tech_L",
+        "label": "Tech • L",
+        "alternatives": [
+          {
+            "id": "crumb_rubber_1",
+            "name": "Crumb rubber-1",
+            "scores": {
+              "human_health": 6.85887815552925,
+              "ecosystem": 19.8886267671846,
+              "resources": 19.6408930003516
+            },
+            "rank": 6,
+            "total": 15.462799307688485
+          },
+          {
+            "id": "crumb_rubber_2",
+            "name": "Crumb rubber-2",
+            "scores": {
+              "human_health": 0.0,
+              "ecosystem": 2.67342769714686,
+              "resources": 0.0
+            },
+            "rank": 7,
+            "total": 0.89114256571562
+          },
+          {
+            "id": "devulcanisation",
+            "name": "Devulcanisation",
+            "scores": {
+              "human_health": 67.5983491615072,
+              "ecosystem": 100.0,
+              "resources": 100.0
+            },
+            "rank": 1,
+            "total": 89.1994497205024
+          },
+          {
+            "id": "rcb_from_pyrolysis",
+            "name": "rCB from Pyrolysis",
+            "scores": {
+              "human_health": 23.3802419292221,
+              "ecosystem": 36.6299767509445,
+              "resources": 92.1470301352807
+            },
+            "rank": 2,
+            "total": 50.71908293848244
+          },
+          {
+            "id": "saf_from_pyrolysis",
+            "name": "SAF from Pyrolysis",
+            "scores": {
+              "human_health": 20.0247178837007,
+              "ecosystem": 28.315127271484,
+              "resources": 69.8202435027964
+            },
+            "rank": 4,
+            "total": 39.386696219327035
+          },
+          {
+            "id": "elt_in_power_plant",
+            "name": "ELT in Power Plant",
+            "scores": {
+              "human_health": 91.3166470994994,
+              "ecosystem": 0.0,
+              "resources": 59.8873000491444
+            },
+            "rank": 3,
+            "total": 50.401315716214604
+          },
+          {
+            "id": "elt_in_cement_kiln",
+            "name": "ELT in Cement kiln",
+            "scores": {
+              "human_health": 100.0,
+              "ecosystem": 16.1151426568884,
+              "resources": 76.1126524120749
+            },
+            "rank": 5,
+            "total": 64.07593168965444
+          }
+        ]
+      }
+    ]
+  }
