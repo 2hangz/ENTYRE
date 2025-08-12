@@ -11,8 +11,6 @@ import KeyOutputs from './pages/KeyOutputs';
 import ArticleDetail from './pages/OutputDetail';
 import PathwayExplorer from './pages/PathwayExplorer';
 import DataVisualisation from './pages/DataVisulisation/DataVisualisation';
-import ComparePathways from './pages/DataVisulisation/components/comparePathways';
-import McdaTool from './pages/DataVisulisation/components/mcdaTool';
 
 export default function App() {
   return (
@@ -28,9 +26,8 @@ export default function App() {
               <Route path="/key-outputs" element={<KeyOutputs />} />
               <Route path="/outputs/:id" element={<ArticleDetail />} />
               <Route path="/pathway-explorer" element={<PathwayExplorer />} />
-              <Route path="/data-visualisation/compare-pathways" element={<ComparePathways />} />
-              <Route path="/data-visualisation/mcda" element={<McdaTool />} />
-              <Route path="/data-visualisation" element={<DataVisualisation />} />
+              {/* Allow nested routes under DataVisualisation */}
+              <Route path="/data-visualisation/*" element={<DataVisualisation />} />
             </Routes>
           </div>
         </main>
