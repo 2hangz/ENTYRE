@@ -2,13 +2,19 @@ import React, { useState, useEffect } from 'react';
 import FileSelector from './FileSelector/FileSelector';
 import McdaMethodSelector from './McdaMethodSelector/McdaMethodSelector';
 import WeightControls from './DataTable/WeightControls';
-import ImageModal from './AnalysisImages/ImageModal';
 import DataTable from './DataTable/DataTable';
 import ClassChart from './Charts/ClassChart';
 import ImageGallery from './AnalysisImages/ImageGallery';
 import { useExcelData } from '../hooks/useExcelData';
 import { recalculateRanks, calculateParetoDominance } from '../utils/mcdaCalculations';
 import styles from './style/MCDA.module.css';
+
+/**
+ * 说明：
+ * 1. 如果 WeightControls 组件没有显示 weight，通常是 data 结构不对或者 weightInputValues 没有正确传递。
+ * 2. 你需要确保 excelData.data 里有权重相关信息，且 weightInputValues 不是 undefined。
+ * 3. 下面增加了 debug 输出，帮助你排查 weightInputValues 和 data 的结构。
+ */
 
 function McdaTool() {
   // Excel data management
@@ -82,34 +88,35 @@ function McdaTool() {
     }
   };
 
-
-  const handleWeightInputChange = (projectName, value) => {
+  // 权重相关事件
+  const handleWeightInputChange = (className, value) => {
+    // 注意：这里参数名是 className，实际应该是 criterionName 或 weightName
     if (excelData.setWeightInputValues) {
       excelData.setWeightInputValues(prev => ({
         ...prev,
-        [projectName]: value
+        [className]: value
       }));
     }
   };
 
-  const handleWeightInputBlur = (projectName) => {
+  const handleWeightInputBlur = (className) => {
     // 可在 useExcelData 中实现，如需失焦校正
   };
 
-  const handleWeightSliderChange = (projectName, value) => {
+  const handleWeightSliderChange = (className, value) => {
     if (excelData.setWeightInputValues) {
       excelData.setWeightInputValues(prev => ({
         ...prev,
-        [projectName]: value
+        [className]: value
       }));
     }
   };
 
-  const handleToggleWeightLock = (projectName) => {
+  const handleToggleWeightLock = (className) => {
     if (excelData.setLockedWeights) {
       excelData.setLockedWeights(prev => ({
         ...prev,
-        [projectName]: !prev[projectName]
+        [className]: !prev[className]
       }));
     }
   };
@@ -120,6 +127,7 @@ function McdaTool() {
     }
   };
 
+  // 其他输入相关事件
   const handleToggleLock = (className, projectName) => {
     if (excelData.setLockedValues) {
       excelData.setLockedValues(prev => ({
@@ -324,6 +332,12 @@ function McdaTool() {
     );
   }
 
+  // --- DEBUG: 打印权重数据结构，帮助排查 weight 没有显示出来的原因 ---
+  // eslint-disable-next-line
+  console.log('weightInputValues:', excelData.weightInputValues);
+  // eslint-disable-next-line
+  console.log('data:', excelData.data);
+
   // 正常渲染所有组件
   return (
     <div className={styles.mcdaToolContainer}>
@@ -355,6 +369,12 @@ function McdaTool() {
             onTopsisIdealTypeChange={handleTopsisIdealTypeChange}
           />
 
+          {/* 
+            WeightControls 组件显示权重，依赖于：
+            1. data 里有权重相关的 criterion/class 信息
+            2. weightInputValues 结构正确
+            3. 事件参数名要和 WeightControls 组件一致
+          */}
           <WeightControls
             weightInputValues={excelData.weightInputValues}
             weightLocks={excelData.lockedWeights}

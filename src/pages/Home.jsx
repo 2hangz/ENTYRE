@@ -9,18 +9,18 @@ const BannerCarousel = () => {
   const baseApi = 'https://entyre-backend.onrender.com/api/banners';
 
   useEffect(() => {
-    // let timer;
+    let timer;
     fetch(`${baseApi}`)
       .then(res => res.json())
       .then(data => {
         const bannersArr = Array.isArray(data) ? data : [];
         setBanners(bannersArr);
 
-        // if (bannersArr.length > 0) {
-        //   timer = setInterval(() => {
-        //     setCurrent(prev => (prev + 1) % bannersArr.length);
-        //   }, 3500);
-        // }
+        if (bannersArr.length > 0) {
+          timer = setInterval(() => {
+            setCurrent(prev => (prev + 1) % bannersArr.length);
+          }, 3500);
+        }
       })
       .catch(err => console.error("Banner fetch error", err));
 
