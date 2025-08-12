@@ -12,7 +12,6 @@ import ConnectedIconNode from '../components/ConnectedIconNode';
 
 const WORKFLOWS_API = 'https://entyre-backend.onrender.com/api/workflow';
 
-// Helper to render node details, including clickable links if present
 function renderDetail(detail) {
   if (!detail) return null;
 
@@ -285,6 +284,27 @@ const PathwayExplorer = () => {
           <Controls/>
           <Background/>
         </ReactFlow>
+      </div>
+      {/* Add the Go compare pathways button at the bottom */}
+      <div style={{ marginTop: 32, textAlign: 'center' }}>
+        <a
+          href="https://2hangz.github.io/ENTYRE/#/data-visualisation/compare"
+          rel="noopener noreferrer"
+          style={{
+            display: 'inline-block',
+            padding: '12px 32px',
+            background: '#2563eb',
+            color: '#fff',
+            borderRadius: 24,
+            fontWeight: 700,
+            fontSize: 18,
+            textDecoration: 'none',
+            boxShadow: '0 2px 8px rgba(37,99,235,0.10)',
+            transition: 'background 0.2s',
+          }}
+        >
+          Go compare pathways
+        </a>
       </div>
     </div>
   );

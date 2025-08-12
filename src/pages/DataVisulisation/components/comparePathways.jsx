@@ -87,7 +87,7 @@ function BarChartLarge({ data, selected, onSelect }) {
 }
 
 export default function ComparePathways() {
-  const [scenarioId, setScenarioId] = useState("Econ_G");
+  const [scenarioId, setScenarioId] = useState("Test");
   const [selected, setSelected] = useState([]);
   const [raw, setRaw] = useState(null); // Raw data from the tool
   const [error, setError] = useState("");
@@ -99,10 +99,11 @@ export default function ComparePathways() {
       setError("");
       setRaw(null);
       try {
-        // Assume this endpoint exists: /api/wsm?scenario=xx
-        const url = `${API_BASE}/api/wsm?scenario=${encodeURIComponent(
-          scenarioId
-        )}`;
+        // // Assume this endpoint exists: /api/wsm?scenario=xx
+        // const url = `${API_BASE}/api/wsm?scenario=${encodeURIComponent(
+        //   scenarioId
+        // )}`;
+        const url = `${API_BASE}/api/wsm?file=Test_Data`;
         const r = await fetch(url, { mode: "cors" });
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         const data = await r.json();
