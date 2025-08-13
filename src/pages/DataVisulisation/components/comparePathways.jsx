@@ -423,11 +423,54 @@ export default function ComparePathways() {
   const scenarioDescription = SCENARIO_DESCRIPTIONS[scenarioId] || "";
   const scenarioName = SCENARIO_NAMES[scenarioId] || scenarioId;
 
+  // 新增说明组件
+  function InfoNotice() {
+    return (
+      <div
+        style={{
+          background: "#e0f2fe",
+          border: "1px solid #bae6fd",
+          borderRadius: 8,
+          padding: "14px 18px",
+          marginBottom: 18,
+          fontSize: 16,
+          color: "#0c4a6e",
+          lineHeight: 1.7,
+        }}
+      >
+        <div>
+          This page displays the rankings of different pathway options, compared using the <strong>Weighted Sum Method (WSM)</strong>. The indicator weights are preset according to the selected scenario. To customize or adjust the weights, please visit the
+          <a
+            href="#/data-visualisation/mcda"
+            style={{ color: "#2563eb", textDecoration: "underline", margin: "0 4px" }}
+            
+            rel="noopener noreferrer"
+          >
+            MCDA Tool
+          </a>
+          page. For detailed instructions, please refer to the
+          <a
+            href="#/data-visualisation/munual"
+            style={{ color: "#2563eb", textDecoration: "underline", margin: "0 4px" }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            User Guide
+          </a>
+          .
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div style={{ maxWidth: 1100, margin: "0 auto", padding: "32px 12px" }}>
       <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 10 }}>
         Pathway Rankings
       </h2>
+
+      {/* 说明区块 */}
+      <InfoNotice />
 
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8, margin: "0 0 20px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
