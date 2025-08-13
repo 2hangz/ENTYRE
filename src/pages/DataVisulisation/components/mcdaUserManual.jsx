@@ -58,36 +58,21 @@ const McdaUserManual = () => (
 
       {/* Main Flowchart */}
       <div style={{ margin: '32px 0' }}>
-        <StepBox title="1. Data Preparation">
-          <ul style={{ margin: 0, paddingLeft: 20 }}>
-            <li>Prepare Excel data file</li>
-            <li>Format: Row 3 for indicator names, from row 4 for data, last row for weights, last column for initial ranking</li>
-            <li>All values must be numbers, weights sum to 1</li>
-          </ul>
-        </StepBox>
-        <Arrow />
-        <StepBox title="2. Access the System">
-          <ul style={{ margin: 0, paddingLeft: 20 }}>
-            <li>Open browser, enter the URL or click the link</li>
-            <li>Enter the MCDA tool page</li>
-          </ul>
-        </StepBox>
-        <Arrow />
-        <StepBox title="3. Select Data File">
+        <StepBox title="1. Select Data File">
           <ul style={{ margin: 0, paddingLeft: 20 }}>
             <li>Select Excel data file in the left panel</li>
             <li>System will automatically load and validate data</li>
           </ul>
         </StepBox>
         <Arrow />
-        <StepBox title="4. Select Decision Method">
+        <StepBox title="2. Select Decision Method">
           <ul style={{ margin: 0, paddingLeft: 20 }}>
             <li>Choose one: Weighted Sum, CP, or TOPSIS</li>
             <li>Adjust method parameters if needed</li>
           </ul>
         </StepBox>
         <Arrow />
-        <StepBox title="5. Adjust Weights and Data">
+        <StepBox title="3. Adjust Weights and Data">
           <ul style={{ margin: 0, paddingLeft: 20 }}>
             <li>Drag sliders or input values to adjust weights/data</li>
             <li>Lock important items to prevent accidental changes</li>
@@ -95,7 +80,7 @@ const McdaUserManual = () => (
           </ul>
         </StepBox>
         <Arrow />
-        <StepBox title="6. View Analysis Results">
+        <StepBox title="4. View Analysis Results">
           <ul style={{ margin: 0, paddingLeft: 20 }}>
             <li>View bar chart, line chart, radar chart, etc. on the right</li>
             <li>Pareto optimal solutions are shown automatically</li>
@@ -103,7 +88,7 @@ const McdaUserManual = () => (
           </ul>
         </StepBox>
         <Arrow />
-        <StepBox title="7. Export & Feedback">
+        <StepBox title="5. Export & Feedback">
           <ul style={{ margin: 0, paddingLeft: 20 }}>
             <li>Export images or data</li>
             <li>Check FAQ or contact support if you encounter issues</li>
@@ -145,51 +130,11 @@ const McdaUserManual = () => (
         </FlowRow>
       </div>
 
-      {/* Common Issue Flows */}
-      <h2 style={{ marginTop: 48, color: '#1976d2' }}>Common Issue Handling Flow</h2>
-      <div style={{ margin: '32px 0' }}>
-        <FlowRow>
-          <StepBox title="Cannot Access Website">
-            <ul style={{ margin: 0, paddingLeft: 20 }}>
-              <li>Check network connection</li>
-              <li>Try another browser or refresh the page</li>
-              <li>Ensure the URL is correct</li>
-            </ul>
-          </StepBox>
-          <Arrow direction="right" />
-          <StepBox title="Still Have Issues">
-            <ul style={{ margin: 0, paddingLeft: 20 }}>
-              <li>Clear cache and cookies</li>
-              <li>Try incognito/private mode</li>
-              <li>Contact technical support</li>
-            </ul>
-          </StepBox>
-        </FlowRow>
-        <div style={{ height: 24 }} />
-        <FlowRow>
-          <StepBox title="Data File Cannot Be Loaded">
-            <ul style={{ margin: 0, paddingLeft: 20 }}>
-              <li>Check file format (.xlsx/.xls)</li>
-              <li>Check data completeness and format</li>
-              <li>File size should not exceed 10MB</li>
-            </ul>
-          </StepBox>
-          <Arrow direction="right" />
-          <StepBox title="Still Have Issues">
-            <ul style={{ margin: 0, paddingLeft: 20 }}>
-              <li>Refresh the page and reselect</li>
-              <li>Refer to FAQ or contact support</li>
-            </ul>
-          </StepBox>
-        </FlowRow>
-      </div>
-
       {/* Version Info */}
       <div style={{ marginTop: 32, color: '#888', fontSize: 14, textAlign: 'center' }}>
         Version: MCDA-Tool-Web-1.0<br />
-        Last updated: 2024<br />
+        Last updated: 2025<br />
         Documentation version: 1.0<br />
-        Environment: Web browser
       </div>
     </div>
   </div>

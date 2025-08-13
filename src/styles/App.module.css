@@ -390,180 +390,542 @@ margin-bottom: 8px;
 /* Pathway Explorer Page */
 
 /* MCDA Page */
-  .class-chart {
-    background: #f8fafc;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px 0 rgba(80, 80, 120, 0.08);
-    transition: box-shadow 0.3s;
-  }
-  .class-chart:hover {
-    box-shadow: 0 4px 16px 0 rgba(80, 80, 120, 0.16);
-  }
+.mcdaToolContainer {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
+}
 
+.mcdaHeader {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  .chart-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #3730a3;
-    text-align: center;
-    margin-bottom: 1rem;
-    letter-spacing: 0.02em;
-  }
+.mcdaHeader h1 {
+  margin: 0 0 10px 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
 
-  .chart-legend {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 1rem;
-  }
+.mcdaHeader p {
+  margin: 0;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
 
-  .chart-legend-item {
-    display: flex;
-    align-items: center;
-    margin-right: 16px;
-    margin-bottom: 4px;
-  }
-  .chart-legend-color {
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    border-radius: 4px;
-    margin-right: 8px;
-  }
-  .chart-legend-label {
-    font-size: 14px;
-    color: #334155;
-  }
+.scriptStatus {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  color: #856404;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 500;
+}
 
+.mcdaContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-top: 20px;
+}
 
-  .pareto-optimal-text {
-    fill: #22c55e;
-    font-weight: bold;
-    font-size: 14px;
-    text-anchor: middle;
-  }
+.mcdaLeftPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
+.mcdaRightPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
-  .mcda-table th, .mcda-table td {
-    border: 1px solid #e5e7eb;
-    padding: 0.75rem 1rem;
-    text-align: center;
-  }
-  .mcda-table th {
-    background: #f3f4f6;
-    color: #1e293b;
-    font-weight: 600;
-  }
-  .mcda-table tr:nth-child(even) {
-    background: #f9fafb;
-  }
-  .mcda-table tr:hover {
-    background: #f1f5f9;
-    transition: background 0.2s;
-  }
+/* File Selector Styles */
+.fileSelector {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5e9;
+}
 
+.fileSelectorHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
 
-  .weight-input {
-    width: 60px;
-    padding: 0.5rem;
-    border: 1px solid #c7d2fe;
-    border-radius: 6px;
-    text-align: center;
+.fileSelectorLabel {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.refreshButton {
+  padding: 8px 16px;
+  font-size: 14px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.refreshButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.loadingMessage {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+
+.successMessage {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #4caf50;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.fileInput {
+  width: 100%;
+  padding: 10px;
+  border: 2px dashed #ddd;
+  border-radius: 5px;
+  background: #f8f9fa;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.fileInput:hover {
+  border-color: #667eea;
+  background: #f0f2ff;
+}
+
+.selectedFile {
+  margin-top: 10px;
+  padding: 10px;
+  background: #e8f5e8;
+  border: 1px solid #4caf50;
+  border-radius: 5px;
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+/* Method Selector Styles */
+.methodSelector {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5e9;
+}
+
+.methodSelector h3 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.methodOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.methodOption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.methodOption input[type="radio"] {
+  margin: 0;
+}
+
+.methodOption label {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.parameterControls {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.parameterControl {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.parameterControl label {
+  min-width: 120px;
+  font-weight: 500;
+}
+
+.parameterControl input,
+.parameterControl select {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+/* Data Table Styles */
+.dataTable {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5e9;
+  overflow: hidden;
+}
+
+.tableHeader {
+  background: #f8f9fa;
+  padding: 15px 20px;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.tableHeader h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.tableContainer {
+  overflow-x: auto;
+  max-height: 400px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.table tr:hover {
+  background: #f8f9fa;
+}
+
+.weightCell {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.weightInput {
+  width: 60px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.weightSlider {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.lockButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.lockButton:hover {
+  color: #333;
+}
+
+.lockButton.locked {
+  color: #e74c3c;
+}
+
+.resetButton {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.resetButton:hover {
+  background: #c82333;
+}
+
+/* Chart Styles */
+.chartContainer {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5e9;
+}
+
+.chartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.chartHeader h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.chartTypeSelector {
+  display: flex;
+  gap: 10px;
+}
+
+.chartTypeButton {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.chartTypeButton.active {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+.chartTypeButton:hover {
+  background: #f8f9fa;
+}
+
+.chartTypeButton.active:hover {
+  background: #5a6fd8;
+}
+
+/* Image Gallery Styles */
+.imageGallery {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5e9;
+}
+
+.galleryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.galleryHeader h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.imageTypeSelector {
+  display: flex;
+  gap: 10px;
+}
+
+.imageTypeButton {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.imageTypeButton.active {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+.imageTypeButton:hover {
+  background: #f8f9fa;
+}
+
+.imageTypeButton.active:hover {
+  background: #5a6fd8;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.galleryItem {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.galleryItem:hover {
+  transform: scale(1.05);
+}
+
+.galleryItem img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.galleryItemTitle {
+  padding: 10px;
+  background: #f8f9fa;
+  font-size: 12px;
+  color: #333;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .mcdaContent {
+    grid-template-columns: 1fr;
+  }
+  
+  .mcdaHeader h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .mcdaToolContainer {
+    padding: 10px;
+  }
+  
+  .mcdaHeader {
+    padding: 15px;
+  }
+  
+  .mcdaHeader h1 {
+    font-size: 1.8rem;
+  }
+  
+  .mcdaHeader p {
     font-size: 1rem;
-    font-weight: 500;
-    background: #fff;
-    transition: border 0.2s;
   }
-  .weight-input:focus {
-    border: 1.5px solid #6366f1;
-    outline: none;
-    background: #eef2ff;
+  
+  .tableContainer {
+    max-height: 300px;
   }
-  .weight-input[disabled] {
-    background: #e5e7eb;
-    color: #9ca3af;
-    cursor: not-allowed;
+  
+  .table {
+    font-size: 12px;
   }
+  
+  .table th,
+  .table td {
+    padding: 8px 5px;
+  }
+  
+  .weightInput {
+    width: 50px;
+  }
+}
 
 
-  .weight-slider {
-    accent-color: #6366f1;
-    width: 100px;
-    margin: 0 8px;
-  }
-  .weight-slider[disabled] {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
+.tabButton {
+  padding: 18px 38px;
+  margin: 0 14px;
+  border: none;
+  border-radius: 0px;
+  background: #ffb600;
+  color: #15304a;
+  font-weight: 700;
+  font-size: 1.5rem;
+  font-family: serif;
+  box-shadow: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.1s;
+  outline: none;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: -0.5px;
+}
 
+.tabButtonActive {
+  background: #ffb600;
+  color: #15304a;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transform: scale(1.04);
+  font-weight: 700;
+}
 
-  .lock-btn {
-    color: #a1a1aa;
-    background: none;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    transition: color 0.2s;
-    margin-left: 4px;
-  }
-  .lock-btn:hover {
-    color: #6366f1;
-  }
+.tabUnderline {
+  display: block;
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(0,0,0,1);
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.12);
+  z-index: 2;
+}
 
-
-  .primary-btn {
-    background: linear-gradient(90deg, #6366f1 0%, #a21caf 100%);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 0.5rem 1.25rem;
-    font-weight: 600;
-    box-shadow: 0 2px 6px 0 rgba(80, 80, 120, 0.08);
-    transition: background 0.2s, box-shadow 0.2s;
-    cursor: pointer;
-  }
-  .primary-btn:hover {
-    background: linear-gradient(90deg, #4f46e5 0%, #7c3aed 100%);
-    box-shadow: 0 4px 12px 0 rgba(80, 80, 120, 0.16);
-  }
-
-
-  .mcda-slider {
-    accent-color: #6366f1;
-    width: 100%;
-    margin-top: 4px;
-  }
-
-
-  .pareto-panel {
-    background: linear-gradient(90deg, #f0fdf4 0%, #f0fdfa 100%);
-    border: 1px solid #bbf7d0;
-    border-radius: 10px;
-    padding: 1rem 1.5rem;
-    margin-bottom: 1rem;
-  }
-  .pareto-panel-title {
-    color: #059669;
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-  }
-  .pareto-panel-optimal {
-    color: #22c55e;
-    font-weight: 600;
-  }
-  .pareto-panel-dominated {
-    color: #f59e42;
-    font-weight: 600;
-  }
-
-
-  @media (max-width: 1024px) {
-    .mcda-main-layout {
-      flex-direction: column;
-    }
-    .mcda-left-panel, .mcda-right-panel {
-      width: 100%;
-    }
-  }
+.tabWrapperCustom {
+  margin-bottom: 32px;
+  display: flex;
+  justify-content: center;
+}
