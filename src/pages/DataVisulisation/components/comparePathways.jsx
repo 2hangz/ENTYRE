@@ -42,6 +42,21 @@ const SCENARIO_DESCRIPTIONS = {
   Hier_L: "Local scenario with hierarchical weighting, where some criteria are prioritised over others based on structured local decision rules."
 };
 
+const PATHWAY_NAME_MAP = {
+  "rCB from Pyrolysis": "pyrolysis-rcb",
+  "SAF from Pyrolysis": "pyrolysis-saf",
+  "Devulcanisation" : "thermo-mechanical-devulcanisation",
+  "Crumb Rubber-1" :"crumb-rubber-concrete",
+  "Crumb rubber-2" : "rubberised-Asphalt",
+  "ELT in Power Plant" : "energy-recovery-cement-kiln",
+  "ELT in Cement kiln" : "energy-recovery-power-plant"
+
+};
+
+function getRealPathwayName(displayName) {
+  return PATHWAY_NAME_MAP[displayName] || displayName;
+}
+
 function pickFileForScenario(files, scenarioId) {
   if (!Array.isArray(files) || !files.length || !scenarioId) return null;
   const [themeRaw, scopeRaw] = String(scenarioId).split("_");
@@ -136,6 +151,13 @@ function computeWeightedSumFromExcelBuffer(arrayBuffer) {
   return { alternatives };
 }
 
+function getPathwayExplorerLink(pathwayName) {
+  // pathwayName为显示名，先查映射表
+  const realName = getRealPathwayName(pathwayName);
+  const slug = slugify(realName);
+  return `#/pathway-explorer/${encodeURIComponent(slug)}`;
+}
+
 function slugify(s) {
   return String(s || "")
     .toLowerCase()
@@ -148,12 +170,25 @@ function BarChartLarge({ data, selected, onSelect, onViewWorkflow }) {
   const safeTotals = data.map((d) => (Number.isFinite(d.total) ? d.total : 0));
   const max = Math.max(0, ...safeTotals);
 
+  const maxRankLen = data.reduce((acc, d) => {
+    const rankStr = d.rank ? `${d.rank}. ` : "";
+    return Math.max(acc, rankStr.length);
+  }, 0);
+  const maxNameLen = data.reduce((acc, d) => Math.max(acc, (d.name || "").length), 0);
+
+  const NAME_WIDTH = 180; 
+  const FONT_SIZE = 15;
+  const CHAR_WIDTH = FONT_SIZE * 0.2; 
+  const RANK_PREFIX_WIDTH = maxRankLen * CHAR_WIDTH;
+  const PATHWAY_NAME_WIDTH = NAME_WIDTH - RANK_PREFIX_WIDTH;
+
   return (
     <div style={{ width: 700, margin: "0 auto" }}>
       {data.map((d) => {
         const isChecked = selected.includes(d.name);
         const total = Number.isFinite(d.total) ? d.total : 0;
         const barWidth = max > 0 ? (total / max) * 300 : 0;
+        // 这里d.name为显示名，getPathwayExplorerLink内部会查映射
         return (
           <div
             key={d.name}
@@ -176,7 +211,6 @@ function BarChartLarge({ data, selected, onSelect, onViewWorkflow }) {
               aria-label={`Select ${d.name}`}
             />
 
-            {/* pathway name inline with bar */}
             <div
               title={d.name}
               style={{
@@ -184,12 +218,42 @@ function BarChartLarge({ data, selected, onSelect, onViewWorkflow }) {
                 whiteSpace: "nowrap",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
-                maxWidth: 260,
+                width: NAME_WIDTH,
+                minWidth: NAME_WIDTH,
+                maxWidth: NAME_WIDTH,
                 flexShrink: 0,
+                display: "flex",
+                alignItems: "center",
               }}
             >
-              {d.rank ? `${d.rank}. ` : ""}
-              <span>{d.name}</span>
+              <span
+                style={{
+                  display: "inline-block",
+                  width: RANK_PREFIX_WIDTH,
+                  minWidth: RANK_PREFIX_WIDTH,
+                  textAlign: "right",
+                  marginRight: 2,
+                  color: "#64748b",
+                  fontVariantNumeric: "tabular-nums",
+                  letterSpacing: "0.5px",
+                }}
+              >
+                {d.rank ? `${d.rank}.` : ""}
+              </span>
+              <span
+                style={{
+                  display: "inline-block",
+                  width: PATHWAY_NAME_WIDTH,
+                  minWidth: PATHWAY_NAME_WIDTH,
+                  maxWidth: PATHWAY_NAME_WIDTH,
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                  verticalAlign: "middle",
+                }}
+              >
+                {d.name}
+              </span>
             </div>
 
             <div
@@ -229,8 +293,10 @@ function BarChartLarge({ data, selected, onSelect, onViewWorkflow }) {
 
             <div style={{ alignSelf: "start" }}>
               {isChecked && (
-                <button
-                  onClick={() => onViewWorkflow?.(d.name)}
+                <a
+                  href={getPathwayExplorerLink(d.name)}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{
                     padding: "6px 10px",
                     borderRadius: 6,
@@ -238,10 +304,14 @@ function BarChartLarge({ data, selected, onSelect, onViewWorkflow }) {
                     background: "#fff",
                     cursor: "pointer",
                     fontSize: 13,
+                    textDecoration: "none",
+                    color: "#2563eb",
+                    display: "inline-block"
                   }}
+                  onClick={() => onViewWorkflow?.(d.name)}
                 >
                   View Workflow
-                </button>
+                </a>
               )}
             </div>
           </div>
@@ -415,9 +485,9 @@ export default function ComparePathways() {
   };
 
   const openWorkflow = (name) => {
-    const url = `#/workflow?pathway=${encodeURIComponent(name)}`;
-    window.dispatchEvent(new CustomEvent("mcda:selectPathway", { detail: { name } }));
-    window.open(url, "_blank");
+    // name为显示名，转换为真实名称后再派发事件
+    const realName = getRealPathwayName(name);
+    window.dispatchEvent(new CustomEvent("mcda:selectPathway", { detail: { name: realName } }));
   };
 
   const scenarioDescription = SCENARIO_DESCRIPTIONS[scenarioId] || "";
@@ -469,7 +539,7 @@ export default function ComparePathways() {
         Pathway Rankings
       </h2>
 
-      {/* 说明区块 */}
+
       <InfoNotice />
 
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8, margin: "0 0 20px" }}>

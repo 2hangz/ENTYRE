@@ -26,7 +26,7 @@ export default function App() {
               <Route path="/key-outputs" element={<KeyOutputs />} />
               <Route path="/outputs/:id" element={<ArticleDetail />} />
               <Route path="/pathway-explorer" element={<PathwayExplorer />} />
-              {/* Allow nested routes under DataVisualisation */}
+              <Route path="/pathway-explorer/*" element={<PathwayExplorer />} />
               <Route path="/data-visualisation/*" element={<DataVisualisation />} />
             </Routes>
           </div>

@@ -76,9 +76,10 @@ const PathwayExplorer = () => {
           obj[wf._id || wf.id] = wf;
         });
         setWorkflows(obj);
-        // Default to first workflow if available
+        // 默认选择倒数第一个路径
         if (data.length > 0) {
-          setSelectedPathway(data[0]._id || data[0].id);
+          const last = data[data.length - 1];
+          setSelectedPathway(last._id || last.id);
         }
         setLoading(false);
       })
@@ -157,6 +158,25 @@ const PathwayExplorer = () => {
     setSelectedNode(node.data);
   }, []);
 
+  // Helper to create a RESTful-friendly pathway name
+  const getPathwaySlug = (name) => {
+    if (!name) return '';
+    return name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-') // replace non-alphanumeric with dash
+      .replace(/^-+|-+$/g, '');    // trim leading/trailing dashes
+  };
+
+  // Helper to get the correct hash route for a pathway
+  const getPathwayHashRoute = (slug) => {
+    // This assumes your SPA is served at /ENTYRE/ and uses hash routing
+    return `/ENTYRE/#/pathway-explorer/${slug}`;
+  };
+
+  const reversedWorkflowsEntries = useMemo(() => {
+    return Object.entries(workflows).reverse();
+  }, [workflows]);
+
   // Loading state
   if (loading) {
     return (
@@ -164,9 +184,6 @@ const PathwayExplorer = () => {
         <h1>ELTs Valorisation Pathways</h1>
         <div>Loading pathways...</div>
         <div style={{ marginTop: 12, color: '#888', fontSize: 14 }}>
-          <span>
-            Fetching workflow data from: <code>{WORKFLOWS_API}</code>
-          </span>
         </div>
       </div>
     );
@@ -178,9 +195,6 @@ const PathwayExplorer = () => {
         <h1>ELTs Valorisation Pathways</h1>
         <div style={{ color: 'red' }}>Error: {error}</div>
         <div style={{ marginTop: 12, color: '#888', fontSize: 14 }}>
-          <span>
-            Tried to fetch workflow data from: <code>{WORKFLOWS_API}</code>
-          </span>
         </div>
       </div>
     );
@@ -202,46 +216,53 @@ const PathwayExplorer = () => {
 
   const currentPathway = workflows[selectedPathway];
 
-  // Defensive: If no currentPathway, show nothing
-  if (!currentPathway) {
-    return (
-      <div className={styles.intro_wrapper}>
-        <h1>ELTs Valorisation Pathways</h1>
-        <div>No pathway selected.</div>
-        <div style={{ marginTop: 12, color: '#888', fontSize: 14 }}>
-          <span>
-            Data is fetched from: <code>{WORKFLOWS_API}</code>
-          </span>
-        </div>
-      </div>
-    );
-  }
+  // Handler for clicking a pathway button: push to /ENTYRE/#/pathway-explorer/slug
+  const handlePathwayClick = (key, name) => {
+    setSelectedPathway(key);
+    const slug = getPathwaySlug(name);
+    if (slug) {
+      // Use hash routing for the correct URL
+      window.location.hash = `#/pathway-explorer/${slug}`;
+      // Optionally, also update the path for SPA navigation if needed
+      // window.history.pushState({}, '', getPathwayHashRoute(slug));
+    }
+  };
 
   return (
     <div className={styles.intro_wrapper}>
       <h1>ELTs Valorisation Pathways</h1>
       {/* Pathways selector */}
       <div className={styles.pathway_selector}>
-        {Object.entries(workflows).map(([key, p]) => (
-          <button
-            key={key}
-            onClick={() => setSelectedPathway(key)}
-            style={{
-              padding: '8px 20px',
-              borderRadius: 20,
-              border: 'none',
-              background: selectedPathway === key ? '#05243B' : '#e5e7eb',
-              color: selectedPathway === key ? '#fff' : '#05243B',
-              fontWeight: 600,
-              fontSize: 16,
-              boxShadow: selectedPathway === key ? '0 2px 8px rgba(5,36,59,0.12)' : 'none',
-              cursor: 'pointer',
-              transition: 'all 0.2s'
-            }}
-          >
-            {p.name}
-          </button>
-        ))}
+        {reversedWorkflowsEntries.map(([key, p]) => {
+          const slug = getPathwaySlug(p.name);
+          const hashRoute = getPathwayHashRoute(slug);
+          return (
+            <a
+              key={key}
+              href={hashRoute}
+              onClick={e => {
+                e.preventDefault();
+                handlePathwayClick(key, p.name);
+              }}
+              style={{
+                display: 'inline-block',
+                padding: '8px 20px',
+                borderRadius: 20,
+                border: 'none',
+                background: selectedPathway === key ? '#05243B' : '#e5e7eb',
+                color: selectedPathway === key ? '#fff' : '#05243B',
+                fontWeight: 600,
+                fontSize: 16,
+                boxShadow: selectedPathway === key ? '0 2px 8px rgba(5,36,59,0.12)' : 'none',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                textDecoration: 'none'
+              }}
+            >
+              {p.name}
+            </a>
+          );
+        })}
       </div>
 
       <div style={{display: 'flex', flexDirection: 'row', gap: 12}}>
