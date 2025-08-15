@@ -19,11 +19,18 @@ const Navbar = () => {
     <nav className={styles.navbar}>
       <div className={styles.navContainer}>
         <div>
-          <Link to="/home" className={styles.logoButton}>
+          <Link to="/home" className={styles.logoButton} style={{ display: 'flex', alignItems: 'center', height: 70 }}>
             <img
-              src="https://www.marei.ie/wp-content/uploads/2020/03/logo-1.png"
+              src="https://res.cloudinary.com/ddzezr2rm/image/upload/v1755300553/logo_d7wqie.png"
               alt="MaREI Centre Logo"
               className={styles.logoImage}
+              style={{ height: 70, width: 'auto', marginRight: 40 }}
+            />
+            <img
+              src="https://res.cloudinary.com/ddzezr2rm/image/upload/v1755300552/logo2_eixhfj.png"
+              alt="MaREI Centre Logo"
+              className={styles.logoImage}
+              style={{ height: 80, width: 'auto' }}
             />
           </Link>
         </div>

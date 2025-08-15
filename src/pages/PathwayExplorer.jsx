@@ -11,6 +11,14 @@ import BackgroundImageNode from '../components/BackgroundImageNode';
 import ConnectedIconNode from '../components/ConnectedIconNode';
 import StatusIndicator from '../components/StatusIndicator';
 
+const defaultEdgeStyles = {
+  default: { stroke: "#003C69", strokeWidth: 2 },
+  redDashed: { stroke: "red", strokeWidth: 2, strokeDasharray: "6 4"},
+  redSolid: { stroke: "red", strokeWidth: 2 },
+  grayDashed: { stroke: "gray", strokeWidth: 2, strokeDasharray: "6 4"},
+  blueBold: { stroke: "blue", strokeWidth: 4 }
+};
+
 const WORKFLOWS_API = 'https://entyre-backend.onrender.com/api/workflow';
 
 function renderDetail(detail) {
@@ -136,6 +144,9 @@ const PathwayExplorer = () => {
   const reactFlowEdges = useMemo(() => {
     const currentPathway = workflows[selectedPathway];
     if (!currentPathway) return [];
+    
+    const edgeStyles = currentPathway.edgeStyles || defaultEdgeStyles;
+    
     return (currentPathway.connections || []).map((conn) => ({
       id: `e${conn.from}-${conn.to}`,
       source: conn.from,
@@ -144,15 +155,23 @@ const PathwayExplorer = () => {
       targetHandle: conn.targetHandle,
       animated: false,
       type: conn.edgeType || 'step',
-      style: conn.edgeStyle ? (currentPathway.edgeStyles && currentPathway.edgeStyles[conn.edgeStyle]) : (currentPathway.edgeStyles && currentPathway.edgeStyles.default),
+      style: conn.edgeStyle && edgeStyles[conn.edgeStyle] ? 
+             edgeStyles[conn.edgeStyle] : 
+             edgeStyles.default,
       markerEnd: {
         type: 'arrowclosed',
         width: 10,
         height: 10,
-        color: (conn.edgeStyle && currentPathway.edgeStyles && currentPathway.edgeStyles[conn.edgeStyle]?.stroke) ? currentPathway.edgeStyles[conn.edgeStyle].stroke : '#003C69', // UCC Crest Blue
+        color: conn.edgeStyle && edgeStyles[conn.edgeStyle] ? 
+               edgeStyles[conn.edgeStyle].stroke : 
+               edgeStyles.default.stroke,
       },
       label: conn.label || undefined,
-      labelStyle: conn.label ? { fill: '#CE1F2C', fontWeight: 600, fontFamily: "'FiraGO', sans-serif" } : undefined, // UCC Crest Red
+      labelStyle: conn.label ? { 
+        fill: '#CE1F2C', 
+        fontWeight: 600, 
+        fontFamily: "'FiraGO', sans-serif" 
+      } : undefined,
     }));
   }, [workflows, selectedPathway]);
 
