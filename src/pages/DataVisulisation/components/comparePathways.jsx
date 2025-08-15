@@ -152,7 +152,6 @@ function computeWeightedSumFromExcelBuffer(arrayBuffer) {
 }
 
 function getPathwayExplorerLink(pathwayName) {
-  // pathwayName为显示名，先查映射表
   const realName = getRealPathwayName(pathwayName);
   const slug = slugify(realName);
   return `#/pathway-explorer/${encodeURIComponent(slug)}`;
@@ -188,7 +187,6 @@ function BarChartLarge({ data, selected, onSelect, onViewWorkflow }) {
         const isChecked = selected.includes(d.name);
         const total = Number.isFinite(d.total) ? d.total : 0;
         const barWidth = max > 0 ? (total / max) * 300 : 0;
-        // 这里d.name为显示名，getPathwayExplorerLink内部会查映射
         return (
           <div
             key={d.name}
@@ -485,7 +483,6 @@ export default function ComparePathways() {
   };
 
   const openWorkflow = (name) => {
-    // name为显示名，转换为真实名称后再派发事件
     const realName = getRealPathwayName(name);
     window.dispatchEvent(new CustomEvent("mcda:selectPathway", { detail: { name: realName } }));
   };
@@ -493,7 +490,7 @@ export default function ComparePathways() {
   const scenarioDescription = SCENARIO_DESCRIPTIONS[scenarioId] || "";
   const scenarioName = SCENARIO_NAMES[scenarioId] || scenarioId;
 
-  // 新增说明组件
+
   function InfoNotice() {
     return (
       <div
@@ -520,9 +517,8 @@ export default function ComparePathways() {
           </a>
           page. For detailed instructions, please refer to the
           <a
-            href="#/data-visualisation/munual"
+            href="#/data-visualisation/manual"
             style={{ color: "#2563eb", textDecoration: "underline", margin: "0 4px" }}
-            target="_blank"
             rel="noopener noreferrer"
           >
             User Guide

@@ -9,6 +9,7 @@ import {
 import styles from '../styles/App.module.css';
 import BackgroundImageNode from '../components/BackgroundImageNode';
 import ConnectedIconNode from '../components/ConnectedIconNode';
+import StatusIndicator from '../components/StatusIndicator';
 
 const WORKFLOWS_API = 'https://entyre-backend.onrender.com/api/workflow';
 
@@ -20,7 +21,7 @@ function renderDetail(detail) {
     const linkText = linkMatch[1];
     const parts = detail.split(/\[|\]/);
     return (
-      <div>
+      <div style={{ fontFamily: "'FiraGO', sans-serif" }}>
         {parts.map((part, index) => {
           if (part === linkText) {
             return (
@@ -29,7 +30,11 @@ function renderDetail(detail) {
                 href={`https://echa.europa.eu/regulations/reach/understanding-reach`}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: 'blue', textDecoration: 'underline' }}
+                style={{ 
+                  color: '#006087',
+                  textDecoration: 'underline',
+                  fontWeight: '500'
+                }}
               >
                 {part}
               </a>
@@ -41,9 +46,8 @@ function renderDetail(detail) {
     );
   }
 
-  return <div>{detail}</div>;
+  return <div style={{ fontFamily: "'FiraGO', sans-serif" }}>{detail}</div>;
 }
-
 
 const edgeTypes = {
   customPolyline: CustomPolylineEdge,
@@ -61,7 +65,6 @@ const PathwayExplorer = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch workflows from backend on mount
   useEffect(() => {
     setLoading(true);
     fetch(WORKFLOWS_API)
@@ -70,13 +73,11 @@ const PathwayExplorer = () => {
         return res.json();
       })
       .then(data => {
-        // Convert array to object keyed by _id or id
         const obj = {};
         data.forEach(wf => {
           obj[wf._id || wf.id] = wf;
         });
         setWorkflows(obj);
-        // 默认选择倒数第一个路径
         if (data.length > 0) {
           const last = data[data.length - 1];
           setSelectedPathway(last._id || last.id);
@@ -93,6 +94,7 @@ const PathwayExplorer = () => {
   const reactFlowNodes = useMemo(() => {
     const currentPathway = workflows[selectedPathway];
     if (!currentPathway) return [];
+
     const currentPositions = currentPathway.nodePositions || {};
     return (currentPathway.nodes || [])
       .map(node => {
@@ -147,10 +149,10 @@ const PathwayExplorer = () => {
         type: 'arrowclosed',
         width: 10,
         height: 10,
-        color: (conn.edgeStyle && currentPathway.edgeStyles && currentPathway.edgeStyles[conn.edgeStyle]?.stroke) ? currentPathway.edgeStyles[conn.edgeStyle].stroke : '#000000',
+        color: (conn.edgeStyle && currentPathway.edgeStyles && currentPathway.edgeStyles[conn.edgeStyle]?.stroke) ? currentPathway.edgeStyles[conn.edgeStyle].stroke : '#003C69', // UCC Crest Blue
       },
       label: conn.label || undefined,
-      labelStyle: conn.label ? { fill: 'red', fontWeight: 600 } : undefined,
+      labelStyle: conn.label ? { fill: '#CE1F2C', fontWeight: 600, fontFamily: "'FiraGO', sans-serif" } : undefined, // UCC Crest Red
     }));
   }, [workflows, selectedPathway]);
 
@@ -158,18 +160,15 @@ const PathwayExplorer = () => {
     setSelectedNode(node.data);
   }, []);
 
-  // Helper to create a RESTful-friendly pathway name
   const getPathwaySlug = (name) => {
     if (!name) return '';
     return name
       .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-') // replace non-alphanumeric with dash
-      .replace(/^-+|-+$/g, '');    // trim leading/trailing dashes
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
   };
 
-  // Helper to get the correct hash route for a pathway
   const getPathwayHashRoute = (slug) => {
-    // This assumes your SPA is served at /ENTYRE/ and uses hash routing
     return `/ENTYRE/#/pathway-explorer/${slug}`;
   };
 
@@ -181,56 +180,33 @@ const PathwayExplorer = () => {
   if (loading) {
     return (
       <div className={styles.intro_wrapper}>
-        <h1>ELTs Valorisation Pathways</h1>
-        <div>Loading pathways...</div>
-        <div style={{ marginTop: 12, color: '#888', fontSize: 14 }}>
-        </div>
-      </div>
-    );
-  }
-  // Error state
-  if (error) {
-    return (
-      <div className={styles.intro_wrapper}>
-        <h1>ELTs Valorisation Pathways</h1>
-        <div style={{ color: 'red' }}>Error: {error}</div>
-        <div style={{ marginTop: 12, color: '#888', fontSize: 14 }}>
-        </div>
-      </div>
-    );
-  }
-  // No data state
-  if (!workflows || Object.keys(workflows).length === 0) {
-    return (
-      <div className={styles.intro_wrapper}>
-        <h1>ELTs Valorisation Pathways</h1>
-        <div>No pathways found.</div>
-        <div style={{ marginTop: 12, color: '#888', fontSize: 14 }}>
-          <span>
-            No data found at: <code>{WORKFLOWS_API}</code>
+        <h1>
+          ELTs Valorisation Pathways
+        </h1>
+          <span style={{ fontFamily: "'FiraGO', sans-serif", color: '#003C69' }}>
+            Loading pathways...
           </span>
-        </div>
       </div>
     );
   }
 
   const currentPathway = workflows[selectedPathway];
 
-  // Handler for clicking a pathway button: push to /ENTYRE/#/pathway-explorer/slug
   const handlePathwayClick = (key, name) => {
     setSelectedPathway(key);
     const slug = getPathwaySlug(name);
     if (slug) {
       // Use hash routing for the correct URL
       window.location.hash = `#/pathway-explorer/${slug}`;
-      // Optionally, also update the path for SPA navigation if needed
-      // window.history.pushState({}, '', getPathwayHashRoute(slug));
     }
   };
 
   return (
     <div className={styles.intro_wrapper}>
-      <h1>ELTs Valorisation Pathways</h1>
+      <h1 style={{ fontFamily: "'Merriweather', Georgia, serif", color: '#003C69' }}>
+        ELTs Valorisation Pathways
+      </h1>
+      
       {/* Pathways selector */}
       <div className={styles.pathway_selector}>
         {reversedWorkflowsEntries.map(([key, p]) => {
@@ -244,16 +220,13 @@ const PathwayExplorer = () => {
                 e.preventDefault();
                 handlePathwayClick(key, p.name);
               }}
+              className={selectedPathway === key ? 'active' : ''}
               style={{
-                display: 'inline-block',
-                padding: '8px 20px',
-                borderRadius: 20,
-                border: 'none',
-                background: selectedPathway === key ? '#05243B' : '#e5e7eb',
-                color: selectedPathway === key ? '#fff' : '#05243B',
-                fontWeight: 600,
-                fontSize: 16,
-                boxShadow: selectedPathway === key ? '0 2px 8px rgba(5,36,59,0.12)' : 'none',
+                borderRadius: '8px',
+                background: selectedPathway === key ? '#003C69' : '#ffffff',
+                color: selectedPathway === key ? '#ffffff' : '#003C69',
+                fontFamily: "'FiraGO', sans-serif",
+                boxShadow: selectedPathway === key ? '0 4px 8px rgba(0, 60, 105, 0.15)' : '0 2px 4px rgba(0, 60, 105, 0.06)',
                 cursor: 'pointer',
                 transition: 'all 0.2s',
                 textDecoration: 'none'
@@ -266,29 +239,61 @@ const PathwayExplorer = () => {
       </div>
 
       <div style={{display: 'flex', flexDirection: 'row', gap: 12}}>
-        {/* Pathway information */}
-        <div style={pathwayInfoCard}>
-          <div style={{ fontWeight: 'bold', fontSize: 20 }}>{currentPathway.name}</div>
-          <div style={{ color: '#666', margin: '4px 0 8px 0' }}>
-            Status:<span style={{
-              color: currentPathway.status === 'verified' ? 'green' :
-                     currentPathway.status === 'researching' ? '#eab308' : '#888',
-              fontWeight: 600
-            }}>{currentPathway.status}</span>
+        <div style={{
+          ...pathwayInfoCard,
+          borderLeft: '4px solid #FFB500',
+          fontFamily: "'FiraGO', sans-serif"
+        }}>
+          <div style={{ 
+            fontFamily: "'Merriweather', Georgia, serif",
+            fontWeight: 'bold', 
+            fontSize: 20,
+            color: '#003C69',
+            marginBottom: '12px'
+          }}>
+            {currentPathway.name}
           </div>
-          <div style={{ color: '#444' }}>{currentPathway.description}</div>
+          <div style={{ 
+            color: '#666', 
+            margin: '0 0 16px 0',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}>
+            <span style={{ fontWeight: '500' }}>Status:</span>
+            <StatusIndicator status={currentPathway.status} />
+          </div>
+          <div style={{ 
+            color: '#003C69',
+            lineHeight: '1.6',
+            fontSize: '15px'
+          }}>
+            {currentPathway.description}
+          </div>
         </div>
-        {/* Node information */}
-        <div className={styles.nodeDetailCard}>
+        
+        <div 
+        className={styles.nodeDetailCard}
+        style={{
+          height: 105,
+        }}>
           {selectedNode ? (
             <>
-              <div className={styles.nodeDetailCardLabel}>{selectedNode.label || selectedNode.id}</div>
+              <div className={styles.nodeDetailCardLabel}>
+                {selectedNode.label || selectedNode.id}
+              </div>
               <div className={styles.nodeDetailCardContent}>
                 {renderDetail(selectedNode.detail)}
               </div>
             </>
           ) : (
-            <div style={{ color: '#888' }}>Click a node to see details here.</div>
+            <div style={{ 
+              color: '#888',
+              fontFamily: "'FiraGO', sans-serif",
+              fontStyle: 'italic'
+            }}>
+              Click a node to see details here.
+            </div>
           )}
         </div>
       </div>
@@ -306,25 +311,40 @@ const PathwayExplorer = () => {
           <Background/>
         </ReactFlow>
       </div>
-      {/* Add the Go compare pathways button at the bottom */}
+      
+      {/* Call to action button */}
       <div style={{ marginTop: 32, textAlign: 'center' }}>
         <a
           href="https://2hangz.github.io/ENTYRE/#/data-visualisation/compare"
           rel="noopener noreferrer"
           style={{
             display: 'inline-block',
-            padding: '12px 32px',
-            background: '#2563eb',
-            color: '#fff',
-            borderRadius: 24,
-            fontWeight: 700,
-            fontSize: 18,
+            padding: '10px 20px',
+            background: '#FFB500',
+            color: '#003C69',
+            borderRadius: '0px',
+            fontWeight: '700',
+            fontSize: '20px',
+            fontFamily: "'FiraGO'",
             textDecoration: 'none',
-            boxShadow: '0 2px 8px rgba(37,99,235,0.10)',
-            transition: 'background 0.2s',
+            transition: 'all 0.2s',
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.background = '#FFB500';
+            e.target.style.color = '#003C69';
+            e.target.style.borderColor = '#FFB500';
+            e.target.style.transform = 'translateY(-2px)';
+            e.target.style.boxShadow = '0 6px 16px rgba(255, 181, 0, 0.25)';
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.background = '#003C69';
+            e.target.style.color = '#ffffff';
+            e.target.style.borderColor = '#003C69';
+            e.target.style.transform = 'translateY(0)';
+            e.target.style.boxShadow = '0 4px 12px rgba(0, 60, 105, 0.15)';
           }}
         >
-          Go compare pathways
+          Compare Pathways →
         </a>
       </div>
     </div>

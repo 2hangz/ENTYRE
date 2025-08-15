@@ -1,19 +1,33 @@
+/* Import UCC brand fonts */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 :root {
+  /* UCC Brand Fonts - using Inter as fallback for FiraGO */
   font-family: 
-    'Gotham', 
-    'Roboto', 
-    'Verdana', 
-    'Bauer Bodoni', 
-    'Playfair Display', 
-    'Times New Roman', 
-    serif, 
+    'Inter', 
+    'FiraGO', 
+    'Segoe UI', 
+    Roboto, 
+    Helvetica, 
+    Arial, 
     sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
+  /* UCC Brand Colors */
+  --ucc-crest-blue: #003C69;
+  --ucc-crest-yellow: #FFB500;
+  --ucc-crest-red: #CE1F2C;
+  --ucc-lee-blue: #006087;
+  --ucc-honan-teal: #49C0B6;
+  --ucc-wollemi-green: #0A6836;
+  --ucc-gold: #ED9A22;
+  --ucc-20k: #D1D3D4;
+
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--ucc-crest-blue);
+  background-color: #f8fafc;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -25,11 +39,80 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  font-family: 'Inter', 'FiraGO', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f8fafc;
+  color: var(--ucc-crest-blue);
+}
+
+/* UCC Typography Classes */
+.ucc-heading {
+  font-family: 'Merriweather', Georgia, serif;
+  color: var(--ucc-crest-blue);
+}
+
+.ucc-body {
+  font-family: 'Inter', 'FiraGO', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: var(--ucc-crest-blue);
+}
+
+/* Ensure all navigation elements use the correct font */
+nav, nav * {
+  font-family: 'Inter', 'FiraGO', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+/* Global link styles with UCC colors */
+a {
+  color: var(--ucc-lee-blue);
+  text-decoration: underline;
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+  color: var(--ucc-crest-blue);
+}
+
+/* Button base styles with UCC branding */
+button {
+  font-family: 'Inter', 'FiraGO', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+/* Form elements */
+input, textarea, select {
+  font-family: 'Inter', 'FiraGO', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Responsive font sizes */
+@media (max-width: 768px) {
+  :root {
+    font-size: 14px;
+  }
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #dddddd;
+    color: var(--ucc-crest-blue);
+    background-color: #f8fafc;
+  }
+}
+
+/* Loading animation for carousel */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  outline: 2px solid var(--ucc-crest-yellow);
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  * {
+    color: black !important;
+    background: white !important;
   }
 }
