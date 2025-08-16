@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { Link } from 'react-router-dom';
 import styles from '../styles/App.module.css';
 
 const BannerCarousel = () => {
@@ -20,7 +21,7 @@ const BannerCarousel = () => {
         if (bannersArr.length > 0 && isPlaying) {
           timer = setInterval(() => {
             setCurrent(prev => (prev + 1) % bannersArr.length);
-          }, 4000); // Slower transition for better UX
+          }, 4000);
         }
       })
       .catch(err => console.error("Banner fetch error", err));
@@ -36,7 +37,7 @@ const BannerCarousel = () => {
 
   const handleDotClick = (index) => {
     setCurrent(index);
-    setIsPlaying(false); // Pause auto-play when user manually selects
+    setIsPlaying(false);
   };
 
   const handleNext = () => {
@@ -61,8 +62,8 @@ const BannerCarousel = () => {
         fontFamily: "'FiraGO', sans-serif"
       }}>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '18px', marginBottom: '8px' }}>Loading banner content...</div>
-          <div style={{ fontSize: '14px', color: '#666' }}>Please wait while we fetch the latest updates</div>
+          <div style={{ fontSize: '18px', marginBottom: '8px' }}>Loading latest updates...</div>
+          <div style={{ fontSize: '14px', color: '#666' }}>Please wait while we fetch content</div>
         </div>
       </div>
     );
@@ -83,7 +84,6 @@ const BannerCarousel = () => {
         />
       </a>
       
-      {/* Navigation arrows */}
       {banners.length > 1 && (
         <>
           <button
@@ -93,8 +93,8 @@ const BannerCarousel = () => {
               left: '16px',
               top: '50%',
               transform: 'translateY(-50%)',
-              background: 'rgba(0, 60, 105, 0.8)', // UCC Crest Blue
-              color: '#FFB500', // UCC Crest Yellow
+              background: 'rgba(85, 149, 197, 0.8)',
+              color: '#FFB500',
               border: 'none',
               borderRadius: '50%',
               width: '48px',
@@ -156,7 +156,6 @@ const BannerCarousel = () => {
         </>
       )}
 
-      {/* Play/Pause button */}
       <button
         onClick={handlePause}
         style={{
@@ -219,67 +218,350 @@ const BannerCarousel = () => {
   );
 };
 
-function renderSectionContent(section, idx) {
-  if (!section) return null;
-  if (section.type === 'text' || !section.type) {
-    return (
-      <div key={idx} style={{ fontFamily: "'FiraGO', sans-serif" }}>
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-          {section.content || ''}
-        </ReactMarkdown>
-      </div>
-    );
-  } else if (section.type === 'image') {
-    return (
-      <img
-        key={idx}
-        src={section.content}
-        alt={section.title || 'Content image'}
-        style={{ 
-          width: '100%', 
-          margin: '16px 0',
+// Hero Section Component
+const HeroSection = () => (
+  <section style={{
+    background: 'linear-gradient(135deg, #003C69 0%, #006087 100%)',
+    color: 'white',
+    padding: '60px 40px',
+    borderRadius: '16px',
+    marginBottom: '48px',
+    textAlign: 'center'
+  }}>
+    <h1 style={{
+      fontFamily: "'Merriweather', Georgia, serif",
+      fontSize: '2.8rem',
+      fontWeight: '700',
+      marginBottom: '24px',
+      lineHeight: '1.2',
+      color: 'white'
+    }}>
+      Transforming Waste Tyres into Valuable Resources
+    </h1>
+    <p style={{
+      fontSize: '1.3rem',
+      fontFamily: "'FiraGO', sans-serif",
+      maxWidth: '800px',
+      margin: '0 auto 32px auto',
+      lineHeight: '1.6',
+      opacity: '0.95'
+    }}>
+      Explore innovative pathways for recycling End-of-Life Tyres (ELTs) in Ireland through 
+      research-backed solutions and interactive decision-making tools.
+    </p>
+    <div style={{
+      display: 'flex',
+      gap: '16px',
+      justifyContent: 'center',
+      flexWrap: 'wrap'
+    }}>
+      <Link
+        to="/pathway-explorer"
+        style={{
+          background: '#FFB500',
+          color: '#003C69',
+          padding: '14px 28px',
           borderRadius: '8px',
-          boxShadow: '0 2px 8px rgba(0, 60, 105, 0.06)'
+          textDecoration: 'none',
+          fontWeight: '600',
+          fontSize: '16px',
+          fontFamily: "'FiraGO', sans-serif",
+          transition: 'all 0.2s',
+          display: 'inline-block'
         }}
-      />
-    );
-  } else if (section.type === 'key-value') {
-    let parsed = {};
-    try {
-      parsed = JSON.parse(section.content || '{}');
-    } catch (e) {
-      parsed = {};
+        onMouseEnter={(e) => {
+          e.target.style.background = '#ED9A22';
+          e.target.style.transform = 'translateY(-2px)';
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.background = '#FFB500';
+          e.target.style.transform = 'translateY(0)';
+        }}
+      >
+        Explore Solutions →
+      </Link>
+      <Link
+        to="/data-visualisation"
+        style={{
+          background: 'transparent',
+          color: 'white',
+          padding: '14px 28px',
+          borderRadius: '8px',
+          textDecoration: 'none',
+          fontWeight: '600',
+          fontSize: '16px',
+          fontFamily: "'FiraGO', sans-serif",
+          border: '2px solid white',
+          transition: 'all 0.2s',
+          display: 'inline-block'
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.background = 'white';
+          e.target.style.color = '#003C69';
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.background = 'transparent';
+          e.target.style.color = 'white';
+        }}
+      >
+        Compare Options
+      </Link>
+    </div>
+  </section>
+);
+
+// Problem Statement Component
+const ProblemSection = () => (
+  <section style={{
+    background: '#f8fafc',
+    padding: '40px',
+    borderRadius: '12px',
+    marginBottom: '48px',
+    border: '1px solid #e2e8f0'
+  }}>
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+      gap: '32px',
+      alignItems: 'center'
+    }}>
+      <div>
+        <h2 style={{
+          fontFamily: "'Merriweather', Georgia, serif",
+          color: '#003C69',
+          fontSize: '2rem',
+          marginBottom: '20px'
+        }}>
+          The Challenge in Ireland
+        </h2>
+        <p style={{
+          fontSize: '1.1rem',
+          lineHeight: '1.7',
+          color: '#333',
+          marginBottom: '16px'
+        }}>
+          Ireland generates approximately <strong>63,000 tonnes</strong> of End-of-Life Tyres annually, 
+          presenting both an environmental challenge and a significant opportunity for resource recovery.
+        </p>
+        <p style={{
+          fontSize: '1.1rem',
+          lineHeight: '1.7',
+          color: '#333'
+        }}>
+          Traditional disposal methods are no longer sustainable. We need innovative approaches 
+          that transform waste tyres into valuable materials while supporting Ireland's circular economy goals.
+        </p>
+      </div>
+      <div style={{
+        background: 'white',
+        padding: '24px',
+        borderRadius: '12px',
+        boxShadow: '0 4px 12px rgba(0, 60, 105, 0.08)'
+      }}>
+        <h3 style={{
+          color: '#CE1F2C',
+          fontSize: '2.5rem',
+          fontWeight: '700',
+          textAlign: 'center',
+          marginBottom: '8px'
+        }}>
+          63,000
+        </h3>
+        <p style={{
+          textAlign: 'center',
+          color: '#666',
+          fontSize: '1.1rem',
+          margin: '0'
+        }}>
+          tonnes of waste tyres<br />generated annually in Ireland
+        </p>
+      </div>
+    </div>
+  </section>
+);
+
+// Features Grid Component
+const FeaturesSection = () => {
+  const features = [
+    {
+      title: "Research Publications",
+      description: "Access peer-reviewed studies, technical reports, and scientific findings on ELT valorisation methods.",
+      icon: "📊",
+      link: "/key-outputs",
+      linkText: "View Research"
+    },
+    {
+      title: "Interactive Pathways",
+      description: "Explore step-by-step recycling processes from waste tyre collection to final products through visual workflows.",
+      icon: "🔄",
+      link: "/pathway-explorer",
+      linkText: "Explore Pathways"
+    },
+    {
+      title: "Decision Support Tools",
+      description: "Use advanced analytics to compare different recycling options based on economic, environmental, and technical criteria.",
+      icon: "⚖️",
+      link: "/data-visualisation",
+      linkText: "Analyze Options"
     }
-    return (
-      <div key={idx} style={{ margin: '16px 0' }}>
-        {Object.entries(parsed).map(([key, value], i) => (
-          <div key={i}>
-            <div className={styles.keyValue}>
-              <strong className={styles.keyValueKey} style={{ 
-                color: '#003C69',
-                fontFamily: "'FiraGO', sans-serif"
-              }}>
-                {key}
-              </strong>
-              <div className={styles.keyValueValue} style={{ 
-                fontFamily: "'FiraGO', sans-serif"
-              }}>
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{value}</ReactMarkdown>
-              </div>
+  ];
+
+  return (
+    <section style={{ marginBottom: '48px' }}>
+      <h2 style={{
+        fontFamily: "'Merriweather', Georgia, serif",
+        color: '#003C69',
+        fontSize: '2.2rem',
+        textAlign: 'center',
+        marginBottom: '40px'
+      }}>
+        What This Platform Offers
+      </h2>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+        gap: '24px'
+      }}>
+        {features.map((feature, index) => (
+          <div
+            key={index}
+            style={{
+              background: 'white',
+              padding: '32px',
+              borderRadius: '12px',
+              boxShadow: '0 4px 12px rgba(0, 60, 105, 0.08)',
+              border: '1px solid #e2e8f0',
+              textAlign: 'center',
+              transition: 'all 0.2s'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-4px)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 60, 105, 0.12)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 60, 105, 0.08)';
+            }}
+          >
+            <div style={{
+              fontSize: '3rem',
+              marginBottom: '16px'
+            }}>
+              {feature.icon}
             </div>
+            <h3 style={{
+              fontFamily: "'Merriweather', Georgia, serif",
+              color: '#003C69',
+              fontSize: '1.4rem',
+              marginBottom: '16px'
+            }}>
+              {feature.title}
+            </h3>
+            <p style={{
+              color: '#666',
+              lineHeight: '1.6',
+              marginBottom: '24px',
+              fontSize: '1rem'
+            }}>
+              {feature.description}
+            </p>
+            <Link
+              to={feature.link}
+              style={{
+                background: '#003C69',
+                color: 'white',
+                padding: '12px 24px',
+                borderRadius: '6px',
+                textDecoration: 'none',
+                fontWeight: '600',
+                fontSize: '14px',
+                fontFamily: "'FiraGO', sans-serif",
+                transition: 'all 0.2s',
+                display: 'inline-block'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = '#006087';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = '#003C69';
+              }}
+            >
+              {feature.linkText}
+            </Link>
           </div>
         ))}
       </div>
-    );
-  }
-  return null;
-}
+    </section>
+  );
+};
+
+// Process Overview Component
+const ProcessOverview = () => (
+  <section style={{
+    background: 'linear-gradient(135deg, #49C0B6 0%, #0A6836 100%)',
+    color: 'white',
+    padding: '48px 40px',
+    borderRadius: '16px',
+    marginBottom: '48px',
+    textAlign: 'center'
+  }}>
+    <h2 style={{
+      fontFamily: "'Merriweather', Georgia, serif",
+      fontSize: '2.2rem',
+      marginBottom: '32px'
+    }}>
+      From Waste to Value
+    </h2>
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+      gap: '24px',
+      maxWidth: '800px',
+      margin: '0 auto'
+    }}>
+      {[
+        { step: "1", title: "Collection", desc: "Gather end-of-life tyres" },
+        { step: "2", title: "Processing", desc: "Transform through various pathways" },
+        { step: "3", title: "Products", desc: "Create valuable materials" },
+        { step: "4", title: "Impact", desc: "Benefit economy & environment" }
+      ].map((item, index) => (
+        <div key={index} style={{ textAlign: 'center' }}>
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.2)',
+            borderRadius: '50%',
+            width: '60px',
+            height: '60px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto 16px auto',
+            fontSize: '1.5rem',
+            fontWeight: '700'
+          }}>
+            {item.step}
+          </div>
+          <h3 style={{
+            fontSize: '1.2rem',
+            marginBottom: '8px',
+            fontFamily: "'FiraGO', sans-serif"
+          }}>
+            {item.title}
+          </h3>
+          <p style={{
+            fontSize: '0.9rem',
+            opacity: '0.9',
+            margin: '0'
+          }}>
+            {item.desc}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+);
 
 export default function Home() {
   const [sections, setSections] = useState([]);
-  const [open1, setOpen1] = useState(true);
-  const [open2, setOpen2] = useState(false);
-  const [open3, setOpen3] = useState(false);
 
   useEffect(() => {
     fetch('https://entyre-backend.onrender.com/api/markdown')
@@ -293,122 +575,170 @@ export default function Home() {
       });
   }, []);
 
-  const collapsibleButtonStyle = {
-    background: '#FFB500', // UCC Crest Yellow
-    color: '#003C69', // UCC Crest Blue
-    border: 'none',
-    borderRadius: '6px',
-    padding: '8px 12px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    fontSize: '16px',
-    fontFamily: "'FiraGO', sans-serif",
-    transition: 'all 0.2s',
-    minWidth: '40px'
-  };
+  function renderSectionContent(section, idx) {
+    if (!section) return null;
+    const sectionTitle = section.title && section.title.trim() !== '' ? (
+      <h3
+        style={{
+          fontFamily: "'FiraGO', sans-serif",
+          color: '#003C69',
+          fontWeight: 700,
+          marginBottom: '12px',
+          marginTop: 0,
+          fontSize: '1.15rem',
+          letterSpacing: '0.01em',
+        }}
+      >
+        {section.title}
+      </h3>
+    ) : null;
+
+    if (section.type === 'text' || !section.type) {
+      return (
+        <div key={idx} style={{ fontFamily: "'FiraGO', sans-serif" }}>
+          {sectionTitle}
+          <div>
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {section.content || ''}
+            </ReactMarkdown>
+          </div>
+        </div>
+      );
+    } else if (section.type === 'image') {
+      return (
+        <div key={idx} style={{ margin: '16px 0'}}>
+          {sectionTitle}
+          <div style={{ textAlign: 'left', marginLeft: 0 }}>
+            <img
+              src={section.content}
+              alt={section.title || 'Content image'}
+              style={{ 
+                width: '100%', 
+                margin: '',
+                borderRadius: '8px',
+                boxShadow: '0 2px 8px rgba(0, 60, 105, 0.06)'
+              }}
+            />
+          </div>
+        </div>
+      );
+    } else if (section.type === 'key-value') {
+      let parsed = {};
+      try {
+        parsed = JSON.parse(section.content || '{}');
+      } catch (e) {
+        parsed = {};
+      }
+      return (
+        <div key={idx}>
+          {sectionTitle}
+          {Object.entries(parsed).map(([key, value], i) => (
+            <div key={i}>
+              <div className={styles.keyValue} style={{ textAlign: 'left', marginLeft: 15 }}>
+                <strong className={styles.keyValueKey} style={{ 
+                  color: '#003C69',
+                  fontFamily: "'FiraGO', sans-serif",
+                  textAlign: 'left'
+                }}>
+                  {key}
+                </strong>
+                <div className={styles.keyValueValue} style={{ 
+                  fontFamily: "'FiraGO', sans-serif",
+                  textAlign: 'left',
+                  marginLeft: 0
+                }}>
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{value}</ReactMarkdown>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    }
+    return null;
+  }
 
   return (
     <div className={styles.intro_wrapper}>
       <BannerCarousel />
+      <HeroSection />
+      <ProblemSection />
+      <FeaturesSection />
+      <ProcessOverview />
       
-      {/* Main content section */}
-      <div style={{ fontFamily: "'FiraGO', sans-serif" }}>
-        {renderSectionContent(sections[0], 0)}
-      </div>
-
-      {/* Collapsible sections with UCC styling */}
-      <div className={styles.collapsible_section}>
-        <div className={styles.collapsible_section_header}>
-          <h2 style={{ 
+      {/* Additional content from CMS if available */}
+      {sections.length > 0 && (
+        <section style={{
+          background: 'white',
+          padding: '40px',
+          borderRadius: '12px',
+          border: '1px solid #e2e8f0',
+          marginBottom: '32px'
+        }}>
+          <h2 style={{
             fontFamily: "'Merriweather', Georgia, serif",
             color: '#003C69',
-            margin: 0
+            fontSize: '2rem',
+            marginBottom: '24px',
+            textAlign: 'center'
           }}>
-            {sections[1]?.title || ''}
+            Latest Updates
           </h2>
-          <button 
-            onClick={() => setOpen1(open => !open)}
-            style={collapsibleButtonStyle}
-            onMouseEnter={(e) => {
-              e.target.style.background = '#ED9A22'; // UCC Gold
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.background = '#FFB500';
-            }}
-            aria-expanded={open1}
-            aria-label={`${open1 ? 'Collapse' : 'Expand'} ${sections[1]?.title || 'section'}`}
-          >
-            {open1 ? "▲" : "▼"}
-          </button>
-        </div>
-        {open1 && (
-          <div className={styles.section_wrapper}>
-            {renderSectionContent(sections[1], 1)}
-          </div>
-        )}
-      </div>
-
-      <div className={styles.collapsible_section}>
-        <div className={styles.collapsible_section_header}>
-          <h2 style={{ 
-            fontFamily: "'Merriweather', Georgia, serif",
-            color: '#003C69',
-            margin: 0
-          }}>
-            {sections[2]?.title || ''}
-          </h2>
-          <button 
-            onClick={() => setOpen2(open => !open)}
-            style={collapsibleButtonStyle}
-            onMouseEnter={(e) => {
-              e.target.style.background = '#ED9A22';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.background = '#FFB500';
-            }}
-            aria-expanded={open2}
-            aria-label={`${open2 ? 'Collapse' : 'Expand'} ${sections[2]?.title || 'section'}`}
-          >
-            {open2 ? "▲" : "▼"}
-          </button>
-        </div>
-        {open2 && (
-          <div className={styles.section_wrapper}>
-            {renderSectionContent(sections[2], 2)}
-          </div>
-        )}
-      </div>
-
-      <div className={styles.collapsible_section}>
-        <div className={styles.collapsible_section_header}>
-          <h2 style={{ 
-            fontFamily: "'Merriweather', Georgia, serif",
-            color: '#003C69',
-            margin: 0
-          }}>
-            {sections[3]?.title || ''}
-          </h2>
-          <button 
-            onClick={() => setOpen3(open => !open)}
-            style={collapsibleButtonStyle}
-            onMouseEnter={(e) => {
-              e.target.style.background = '#ED9A22';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.background = '#FFB500';
-            }}
-            aria-expanded={open3}
-            aria-label={`${open3 ? 'Collapse' : 'Expand'} ${sections[3]?.title || 'section'}`}
-          >
-            {open3 ? "▲" : "▼"}
-          </button>
-        </div>
-        {open3 && (
-          <div className={styles.section_wrapper}>
-            {renderSectionContent(sections[3], 3)}
-          </div>
-        )}
-      </div>
+          {sections.slice(0, 2).map((section, idx) => renderSectionContent(section, idx))}
+        </section>
+      )}
+      
+      {/* Call to Action */}
+      <section style={{
+        textAlign: 'center',
+        padding: '48px 32px',
+        background: '#f8fafc',
+        borderRadius: '12px',
+        border: '1px solid #e2e8f0'
+      }}>
+        <h2 style={{
+          fontFamily: "'Merriweather', Georgia, serif",
+          color: '#003C69',
+          fontSize: '1.8rem',
+          marginBottom: '16px'
+        }}>
+          Ready to Explore Solutions?
+        </h2>
+        <p style={{
+          fontSize: '1.1rem',
+          color: '#666',
+          marginBottom: '32px',
+          maxWidth: '600px',
+          margin: '0 auto 32px auto'
+        }}>
+          Discover how different recycling pathways can transform Ireland's waste tyres into valuable resources.
+        </p>
+        <Link
+          to="/pathway-explorer"
+          style={{
+            background: '#003C69',
+            color: 'white',
+            padding: '16px 32px',
+            borderRadius: '8px',
+            textDecoration: 'none',
+            fontWeight: '600',
+            fontSize: '18px',
+            fontFamily: "'FiraGO', sans-serif",
+            transition: 'all 0.2s',
+            display: 'inline-block'
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.background = '#006087';
+            e.target.style.transform = 'translateY(-2px)';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.background = '#003C69';
+            e.target.style.transform = 'translateY(0)';
+          }}
+        >
+          Start Exploring →
+        </Link>
+      </section>
     </div>
   );
 }
