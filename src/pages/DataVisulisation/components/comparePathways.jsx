@@ -52,6 +52,11 @@ const PATHWAY_NAME_MAP = {
   "ELT in Cement kiln" : "energy-recovery-power-plant"
 };
 
+const PATHWAY_NAME_EXPLANATIONS = {
+  "Crumb Rubber-1": "Crumb Rubber-1 = Crumb rubber in crumb rubber concrete",
+  "Crumb rubber-2": "Crumb Rubber-2 = Crumb rubber in rubberised asphalt"
+};
+
 function getRealPathwayName(displayName) {
   return PATHWAY_NAME_MAP[displayName] || displayName;
 }
@@ -248,8 +253,26 @@ function BarChartLarge({ data, selected, onSelect, onViewWorkflow }) {
                   whiteSpace: "nowrap",
                   verticalAlign: "middle",
                 }}
+                title={
+                  d.name in PATHWAY_NAME_EXPLANATIONS
+                    ? PATHWAY_NAME_EXPLANATIONS[d.name]
+                    : undefined
+                }
               >
                 {d.name}
+                {d.name in PATHWAY_NAME_EXPLANATIONS && (
+                  <span
+                    style={{
+                      fontSize: 12,
+                      color: "#64748b",
+                      marginLeft: 4,
+                      verticalAlign: "super",
+                    }}
+                    title={PATHWAY_NAME_EXPLANATIONS[d.name]}
+                  >
+                    *
+                  </span>
+                )}
               </span>
             </div>
 
@@ -314,6 +337,13 @@ function BarChartLarge({ data, selected, onSelect, onViewWorkflow }) {
           </div>
         );
       })}
+      {/* Explanations for Crumb Rubber-1 and Crumb Rubber-2 */}
+      <div style={{ fontSize: 14, color: "#64748b", marginTop: 10 }}>
+        <span>
+          <span style={{ fontWeight: 600 }}>
+            Note:</span>Crumb Rubber-1 = Crumb rubber in Crumb Rubber Concrete; Crumb Rubber-2 = Crumb rubber in Rubberised Asphalt
+        </span>
+      </div>
     </div>
   );
 }
@@ -339,7 +369,7 @@ function AnalysisPanel({ ranking, selected }) {
       <h4 style={{ margin: "0 0 8px" }}>Selected Pathways — Quick Analysis</h4>
       {/* Explanation below quick analysis */}
       <div style={{ fontSize: 14, color: "#475569", marginBottom: 14 }}>
-        The numbers in brackets represent the weighted contributions of each indicator to the overall score. A higher value means that criterion had more influence on the ranking. <span style={{ color: "#64748b" }}></span>
+        The numbers in brackets represent the weighted contributions of each indicator to the overall score. A higher value means that criterion had more influence on the ranking.
       </div>
       <div style={{ display: "grid", gap: 12 }}>
         {selectedItems.map((item) => {
@@ -347,10 +377,7 @@ function AnalysisPanel({ ranking, selected }) {
             .sort((a, b) => (b?.value || 0) - (a?.value || 0))
             .slice(0, 3);
 
-          // const total = item.total || 1;
           const lines = topParts.map((p) => {
-            // const pct = total > 0 ? ((p.value / total) * 100).toFixed(1) : "0.0";
-            // return `${p.label} (${pct}%)`;
             return `${p.label} (${p.value.toFixed(2)})`;
           });
 
@@ -527,7 +554,6 @@ export default function ComparePathways() {
       <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 10 }}>
         Pathway Rankings
       </h2>
-
 
       <InfoNotice />
 
