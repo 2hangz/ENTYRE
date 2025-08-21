@@ -50,7 +50,6 @@ const PATHWAY_NAME_MAP = {
   "Crumb rubber-2" : "rubberised-Asphalt",
   "ELT in Power Plant" : "energy-recovery-cement-kiln",
   "ELT in Cement kiln" : "energy-recovery-power-plant"
-
 };
 
 function getRealPathwayName(displayName) {
@@ -338,16 +337,21 @@ function AnalysisPanel({ ranking, selected }) {
       }}
     >
       <h4 style={{ margin: "0 0 8px" }}>Selected Pathways — Quick Analysis</h4>
+      {/* Explanation below quick analysis */}
+      <div style={{ fontSize: 14, color: "#475569", marginBottom: 14 }}>
+        The numbers in brackets represent the weighted contributions of each indicator to the overall score. A higher value means that criterion had more influence on the ranking. <span style={{ color: "#64748b" }}>括号内的数字表示每个指标对总分的加权贡献，数值越高，说明该指标对排名的影响越大。</span>
+      </div>
       <div style={{ display: "grid", gap: 12 }}>
         {selectedItems.map((item) => {
           const topParts = [...(item.parts || [])]
             .sort((a, b) => (b?.value || 0) - (a?.value || 0))
             .slice(0, 3);
 
-          const total = item.total || 1;
+          // const total = item.total || 1;
           const lines = topParts.map((p) => {
-            const pct = total > 0 ? ((p.value / total) * 100).toFixed(1) : "0.0";
-            return `${p.label} (${pct}%)`;
+            // const pct = total > 0 ? ((p.value / total) * 100).toFixed(1) : "0.0";
+            // return `${p.label} (${pct}%)`;
+            return `${p.label} (${p.value.toFixed(2)})`;
           });
 
           const summary =
@@ -460,17 +464,6 @@ export default function ComparePathways() {
     }));
   }, [raw]);
 
-  const whyText = useMemo(() => {
-    if (!ranking.length) return "";
-    const top1 = ranking[0];
-    const parts = Array.isArray(top1.parts) ? top1.parts : [];
-    const top3 = [...parts].sort((a, b) => (b?.value || 0) - (a?.value || 0)).slice(0, 3);
-    if (!top3.length) return `${top1.name} has the highest overall score.`;
-    const names = top3.map((p) => p?.label ?? "factor");
-    if (names.length === 1) return `${top1.name} ranks #1 mainly due to higher contribution in ${names[0]}.`;
-    if (names.length === 2) return `${top1.name} ranks #1 mainly due to higher contributions in ${names[0]} and ${names[1]}.`;
-    return `${top1.name} ranks #1 mainly due to higher contributions in ${names[0]} and ${names[1]}, and also maintains stable performance in ${names[2]}.`;
-  }, [ranking]);
 
   const handleSelect = (name) => {
     setSelected((prev) =>
@@ -626,11 +619,6 @@ export default function ComparePathways() {
       </div>
 
       <AnalysisPanel ranking={ranking} selected={selected} />
-
-      <div style={{ background: "#F9FAFB", border: "1px solid #eee", borderRadius: 10, padding: 16 }}>
-        <strong>Why #1?</strong>
-        <p style={{ margin: "7px 0 0" }}>{whyText}</p>
-      </div>
     </div>
   );
 }
