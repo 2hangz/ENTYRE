@@ -339,7 +339,7 @@ function AnalysisPanel({ ranking, selected }) {
       <h4 style={{ margin: "0 0 8px" }}>Selected Pathways — Quick Analysis</h4>
       {/* Explanation below quick analysis */}
       <div style={{ fontSize: 14, color: "#475569", marginBottom: 14 }}>
-        The numbers in brackets represent the weighted contributions of each indicator to the overall score. A higher value means that criterion had more influence on the ranking. <span style={{ color: "#64748b" }}>括号内的数字表示每个指标对总分的加权贡献，数值越高，说明该指标对排名的影响越大。</span>
+        The numbers in brackets represent the weighted contributions of each indicator to the overall score. A higher value means that criterion had more influence on the ranking. <span style={{ color: "#64748b" }}></span>
       </div>
       <div style={{ display: "grid", gap: 12 }}>
         {selectedItems.map((item) => {
